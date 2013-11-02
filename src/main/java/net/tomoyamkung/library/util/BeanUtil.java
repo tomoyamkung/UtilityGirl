@@ -95,7 +95,7 @@ public class BeanUtil {
 	 * @throws NoSuchFieldException
 	 * @throws SecurityException
 	 */
-	private static <E> Field getField(String fieldName, E e)
+	public static <E> Field getField(String fieldName, E e)
 			throws NoSuchFieldException, SecurityException {
 		Field field = null;
 		try {
