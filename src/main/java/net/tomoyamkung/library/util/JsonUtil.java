@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 
 import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
@@ -13,26 +14,54 @@ import org.codehaus.jackson.map.ObjectMapper;
  * シリアライズ・デシリアライズの実装は Jackson を利用している。
  * 
  * @author tomoyamkung
- *
+ * 
  */
 public class JsonUtil {
-	
+
 	/**
 	 * オブジェクトをシリアライズする。
 	 * 
-	 * 日付項目のフォーマットを指定する場合に使用する。
-	 * 
-	 * @param object シリアライズするクラス
-	 * @param dateFormat 日付項目のフォーマット
-	 * @return
-	 * @throws IOException 
-	 * @throws JsonMappingException 
-	 * @throws JsonGenerationException 
+	 * @param object
+	 *            シリアライズするクラス
+	 * @param dateFormat
+	 *            日付項目のフォーマット
+	 * @return JSON
+	 * @throws IOException
+	 *             シリアライズに失敗した場合
+	 * @throws JsonMappingException
+	 *             シリアライズに失敗した場合
+	 * @throws JsonGenerationException
+	 *             シリアライズに失敗した場合
 	 */
-	public static String serialize(Object object, String dateFormat) throws JsonGenerationException, JsonMappingException, IOException {
+	public static String serialize(Object object, String dateFormat)
+			throws JsonGenerationException, JsonMappingException, IOException {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.setDateFormat(new SimpleDateFormat(dateFormat));
 		return mapper.writeValueAsString(object);
 	}
 
+	/**
+	 * JSON からオブジェクトにデシリアライズする。
+	 * 
+	 * @param jsonString
+	 *            デシリアライズする JSON
+	 * @param clazz
+	 *            デシリアライズするクラス
+	 * @param dateFormat
+	 *            日付項目のフォーマット
+	 * @return デシリアライズしたクラスのオブジェクト
+	 * @throws JsonParseException
+	 *             デシリアライズに失敗した場合
+	 * @throws JsonMappingException
+	 *             デシリアライズに失敗した場合
+	 * @throws IOException
+	 *             デシリアライズに失敗した場合
+	 */
+	public static <T> T deserialize(String jsonString, Class<T> clazz,
+			String dateFormat) throws JsonParseException, JsonMappingException,
+			IOException {
+		ObjectMapper mapper = new ObjectMapper();
+		mapper.setDateFormat(new SimpleDateFormat(dateFormat));
+		return mapper.readValue(jsonString, clazz);
+	}
 }
