@@ -35,6 +35,14 @@ public class FieldValue {
 		this.value = value;
 	}
 	
+	/**
+	 * 保持するフィールドの名称と値を設定する。
+	 * 
+	 * @param src フィールドオブジェクト
+	 * @param obj <code>src</code> を保持しているオブジェクト
+	 * @throws IllegalArgumentException
+	 * @throws IllegalAccessException
+	 */
 	public <T> FieldValue(Field src, T obj) throws IllegalArgumentException, IllegalAccessException {
 		this(src.getName(), src.get(obj));
 	}
