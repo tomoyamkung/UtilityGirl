@@ -23,19 +23,19 @@ public class BeanUtilTest {
 		// Verify
 		assertThat(src.integerValue, is(dest.integer_value));
 		assertThat(src.string_value, is(dest.stringValue));
-		assertThat(src.doubleValue, is(dest.doubleValue));
+		assertThat(src.double_value, is(dest.double_value));
 		assertThat(src.dateValue, is(dest.dateValue));
 		assertThat(src.booleanValue, is(dest.booleanValue));
 		
 		assertThat(src.parentIntegerValue, is(dest.parent_integer_value));
 		assertThat(src.parent_string_value, is(dest.parentStringValue));
-		assertThat(src.parentDoubleValue, is(dest.parentDoubleValue));
+		assertThat(src.parent_double_value, is(dest.parent_double_value));
 		assertThat(src.parentDateValue, is(dest.parentDateValue));
 		assertThat(src.parentBooleanValue, is(dest.parentBooleanValue));
 		
 		assertThat(src.grandfatherIntegerValue, is(dest.grandfather_integer_value));
 		assertThat(src.grandfather_string_value, is(dest.grandfatherStringValue));
-		assertThat(src.grandfatherDoubleValue, is(dest.grandfatherDoubleValue));
+		assertThat(src.grandfather_double_value, is(dest.grandfather_double_value));
 		assertThat(src.grandfatherDateValue, is(dest.grandfatherDateValue));
 		assertThat(src.grandfatherBooleanValue, is(dest.grandfatherBooleanValue));
 		
@@ -45,7 +45,7 @@ public class BeanUtilTest {
 		
 		private Integer integerValue;
 		private String string_value;
-		private Double doubleValue;
+		private Double double_value;
 		private Date dateValue;
 		private Boolean booleanValue;
 		
@@ -57,7 +57,7 @@ public class BeanUtilTest {
 			
 			this.integerValue = integerValue;
 			this.string_value = stringValue;
-			this.doubleValue = doubleValue;
+			this.double_value = doubleValue;
 			this.dateValue = dateValue;
 			this.booleanValue = booleanValue;
 		}
@@ -67,7 +67,7 @@ public class BeanUtilTest {
 	public class ParentCopySrc extends GrandfatherCopySrc {
 		protected Integer parentIntegerValue;
 		protected String parent_string_value;
-		protected double parentDoubleValue;
+		protected double parent_double_value;
 		protected Date parentDateValue;
 		protected Boolean parentBooleanValue;
 		
@@ -77,7 +77,7 @@ public class BeanUtilTest {
 			
 			this.parentIntegerValue = parentIntegerValue;
 			this.parent_string_value = parentStringValue;
-			this.parentDoubleValue = parentDoubleValue;
+			this.parent_double_value = parentDoubleValue;
 			this.parentDateValue = parentDateValue;
 			this.parentBooleanValue = parentBooleanValue;
 		}
@@ -86,14 +86,14 @@ public class BeanUtilTest {
 	public class GrandfatherCopySrc {
 		protected Integer grandfatherIntegerValue;
 		protected String grandfather_string_value;
-		protected double grandfatherDoubleValue;
+		protected double grandfather_double_value;
 		protected Date grandfatherDateValue;
 		protected Boolean grandfatherBooleanValue;
 		
 		public GrandfatherCopySrc(Integer grandfatherIntegerValue, String grandfatherStringValue, double grandfatherDoubleValue, Date grandfatherDateValue, Boolean grandfatherBooleanValue) {
 			this.grandfatherIntegerValue = grandfatherIntegerValue;
 			this.grandfather_string_value = grandfatherStringValue;
-			this.grandfatherDoubleValue = grandfatherDoubleValue;
+			this.grandfather_double_value = grandfatherDoubleValue;
 			this.grandfatherDateValue = grandfatherDateValue;
 			this.grandfatherBooleanValue = grandfatherBooleanValue;
 		}
@@ -103,19 +103,19 @@ public class BeanUtilTest {
 		
 		private Integer integer_value;
 		private String stringValue;
-		private Double doubleValue;
+		private Double double_value;
 		private Date dateValue;
 		private Boolean booleanValue;
 		
 		private Integer parent_integer_value;
 		private String parentStringValue;
-		private double parentDoubleValue;
+		private double parent_double_value;
 		private Date parentDateValue;
 		private Boolean parentBooleanValue;
 		
 		private Integer grandfather_integer_value;
 		private String grandfatherStringValue;
-		private double grandfatherDoubleValue;
+		private double grandfather_double_value;
 		private Date grandfatherDateValue;
 		private Boolean grandfatherBooleanValue;
 		
