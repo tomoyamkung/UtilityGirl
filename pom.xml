@@ -27,6 +27,13 @@
       <version>14.0.1</version>
     </dependency>
     
+    <!-- JSON -->
+    <dependency>
+	  <groupId>org.codehaus.jackson</groupId>
+	  <artifactId>jackson-jaxrs</artifactId>
+	  <version>1.9.13</version>
+    </dependency>
+    
     <!-- TEST -->
     <dependency>
       <groupId>junit</groupId>
