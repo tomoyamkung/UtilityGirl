@@ -87,7 +87,7 @@ public class BeanUtil {
 	/**
 	 * フィールドを取得する。
 	 * 
-	 * 指定したフィールド名がそのクラスに定義されていない場合は、スーパークラスを検索する。
+	 * フィールド名は camelCase と snake_case の両方で検索する。
 	 * 
 	 * @param fieldName
 	 * @param e
@@ -99,9 +99,13 @@ public class BeanUtil {
 			throws NoSuchFieldException, SecurityException {
 		Field field = null;
 		try {
-			field = e.getClass().getDeclaredField(fieldName);
+			field = e.getClass().getDeclaredField((fieldName));
 		} catch (NoSuchFieldException ex) {
-			field = e.getClass().getDeclaredField(StringUtil.toLowerSnakeCase(fieldName));
+			try {
+				field = e.getClass().getDeclaredField(StringUtil.toLowerSnakeCase(fieldName));
+			} catch (NoSuchFieldException ex2) {
+				field = e.getClass().getDeclaredField(StringUtil.toLowerCamelCase(fieldName));
+			}
 		}
 
 		if (field == null) {
