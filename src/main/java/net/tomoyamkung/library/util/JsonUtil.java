@@ -3,6 +3,8 @@ package net.tomoyamkung.library.util;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 
+import net.tomoyamkung.library.model.json.JsonClass;
+
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
@@ -63,5 +65,19 @@ public class JsonUtil {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.setDateFormat(new SimpleDateFormat(dateFormat));
 		return mapper.readValue(jsonString, clazz);
+	}
+	
+	/**
+	 * JSON をオブジェクトにデシリアライズせずに、設定されていた全属性を String オブジェクトとして抽出する。
+	 * 
+	 * @param jsonString 抽出する JSON
+	 * @return
+	 */
+	public static JsonClass toJsonClass(String jsonString) {
+		if(StringUtil.isNullOrEmpty(jsonString)) {
+			return null;
+		}
+		return new JsonClass(jsonString);
+		
 	}
 }
