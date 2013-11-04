@@ -31,23 +31,24 @@ public class JsonClass {
 			return;
 		}
 
-		parse(jsonString);
+		parse(jsonString.trim());
 	}
 
 	/**
 	 * JSON を解析して属性を抽出する。
 	 * 
-	 * @param jsonString 解析する JSON
+	 * @param jsonString
+	 *            解析する JSON
 	 */
 	private void parse(String jsonString) {
 		attributes = new HashMap<String, String>();
-		
+
 		String json = removeExtractWord(jsonString);
-		for (String attribute : json.split(",")) {
-			String x = attribute.trim();
-			int position = x.indexOf(":");
-			String key = removeExtractWord(x.substring(0, position));
-			String value = removeExtractWord(x.substring(position + 1));
+		JsonAttributeSpliter spliter = new JsonAttributeSpliter(json);
+		while (spliter.hasNext()) {
+			JsonItem jsonItem = spliter.next();
+			String key = jsonItem.getName();
+			String value = jsonItem.getValue();
 			attributes.put(key, value);
 		}
 	}
@@ -59,7 +60,6 @@ public class JsonClass {
 	 * @return
 	 */
 	private String removeExtractWord(String json) {
-		json = json.trim();
 		if (!json.startsWith("\"") && !json.startsWith("{")) {
 			return json;
 		}
@@ -77,23 +77,20 @@ public class JsonClass {
 	 * @return
 	 */
 	public String getValue(String attributeName) {
-		if (StringUtil.isNullOrEmpty(attributeName)) {
-			return null;
-		}
-
 		if (attributes == null) {
 			return null;
 		}
 
+		if (StringUtil.isNullOrEmpty(attributeName)) {
+			return null;
+		}
+		
 		if (!attributes.containsKey(attributeName)) {
 			return null;
 		}
 
 		String value = attributes.get(attributeName);
-		if (StringUtil.isNullOrEmpty(value)) {
-			return null;
-		}
-		return value;
+		return StringUtil.isNullOrEmpty(value) ? null : value;
 	}
 
 }
