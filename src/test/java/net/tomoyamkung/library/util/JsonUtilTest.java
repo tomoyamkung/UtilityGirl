@@ -41,9 +41,9 @@ public class JsonUtilTest {
 			
 			// Verify
 			assertThat(actual, is(not(nullValue(JsonClass.class))));
-			assertThat(actual.getValue("user_id"), is(testJson.getUserId().toString()));
-			assertThat(actual.getValue("nickname"), is(testJson.getNickname()));
-			assertThat("存在しない属性名の場合は null が返ってくる", actual.getValue("x"), is(nullValue(String.class)));
+			assertThat(actual.getString("user_id"), is(testJson.getUserId().toString()));
+			assertThat(actual.getString("nickname"), is(testJson.getNickname()));
+			assertThat("存在しない属性名の場合は null が返ってくる", actual.getString("x"), is(nullValue(String.class)));
 		}
 		
 		private static final class TestJson {

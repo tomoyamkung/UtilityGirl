@@ -30,10 +30,10 @@ public class JsonClassTest {
 
 			// Verify
 			assertThat(actual, is(not(nullValue(JsonClass.class))));
-			assertThat("snake_case で取得する", actual.getValue("user_id"),
+			assertThat("snake_case で取得する", actual.getString("user_id"),
 					is(testJson.getUserId().toString()));
-			assertThat(actual.getValue("nickname"), is(testJson.getNickname()));
-			assertThat("存在しない属性名の場合は null が返ってくる", actual.getValue("x"),
+			assertThat(actual.getString("nickname"), is(testJson.getNickname()));
+			assertThat("存在しない属性名の場合は null が返ってくる", actual.getString("x"),
 					is(nullValue(String.class)));
 		}
 
@@ -71,11 +71,12 @@ public class JsonClassTest {
 
 			// Verify
 			assertThat(actual, is(not(nullValue(JsonClass.class))));
-			assertThat("snake_case で取得する", actual.getValue("user_id"),
+			assertThat("snake_case で取得する", actual.getString("user_id"),
 					is(testJson.getUserId().toString()));
-			assertThat(actual.getValue("nickname"), is(testJson.getNickname()));
-			assertThat(actual.getValue("stringList"), is("1st,2nd,3rd"));
-			assertThat("存在しない属性名の場合は null が返ってくる", actual.getValue("x"),
+			assertThat(actual.getString("nickname"), is(testJson.getNickname()));
+			assertThat(actual.getString("stringList"), is("1st,2nd,3rd"));
+			
+			assertThat("存在しない属性名の場合は null が返ってくる", actual.getString("x"),
 					is(nullValue(String.class)));
 		}
 		
@@ -83,7 +84,7 @@ public class JsonClassTest {
 			
 			private List<String> stringList;
 
-			public ListJson(int userId, String nickname) {
+			ListJson(int userId, String nickname) {
 				super(userId, nickname);
 				
 				stringList = new ExtArrayList<String>().addThis("1st").addThis("2nd").addThis("3rd");

@@ -76,7 +76,7 @@ public class JsonClass {
 	 *            取得する属性の名称
 	 * @return
 	 */
-	public String getValue(String attributeName) {
+	public String getString(String attributeName) {
 		if (attributes == null) {
 			return null;
 		}
