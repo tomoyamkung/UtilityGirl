@@ -1,6 +1,8 @@
 package net.tomoyamkung.library.model.json;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import net.tomoyamkung.library.util.StringUtil;
@@ -91,6 +93,22 @@ public class JsonClass {
 
 		String value = attributes.get(attributeName);
 		return StringUtil.isNullOrEmpty(value) ? null : value;
+	}
+
+	/**
+	 * 属性の値を取得する。
+	 * 
+	 * String オブジェクトを格納する List で返す。
+	 * 
+	 * @param attributeName 取得する属性の名称
+	 * @return
+	 */
+	public List<String> getList(String attributeName) {
+		String stringValue = getString(attributeName);
+		if(StringUtil.isNullOrEmpty(stringValue)) {
+			return null;
+		}
+		return Arrays.asList(stringValue.split(","));
 	}
 
 }

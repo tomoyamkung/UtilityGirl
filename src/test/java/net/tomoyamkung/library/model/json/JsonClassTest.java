@@ -75,6 +75,9 @@ public class JsonClassTest {
 					is(testJson.getUserId().toString()));
 			assertThat(actual.getString("nickname"), is(testJson.getNickname()));
 			assertThat(actual.getString("stringList"), is("1st,2nd,3rd"));
+			assertThat(actual.getList("stringList").get(0), is("1st"));
+			assertThat(actual.getList("stringList").get(1), is("2nd"));
+			assertThat(actual.getList("stringList").get(2), is("3rd"));
 			
 			assertThat("存在しない属性名の場合は null が返ってくる", actual.getString("x"),
 					is(nullValue(String.class)));
@@ -95,4 +98,31 @@ public class JsonClassTest {
 			}
 		}
 	}
+	
+//	public static class オブジェクトを格納したリストの場合 {
+//	
+//	@Test
+//	public void test() throws Exception {
+//		// Setup
+//		JsonList jsonList = new JsonList();
+//		jsonList.add(new SimpleJson(10, "ニックネーム１"));
+//		jsonList.add(new SimpleJson(100, "ニックネーム２"));
+//		jsonList.add(new SimpleJson(1000, "ニックネーム３"));
+//		String jsonString = JsonUtil.serialize(jsonList, "");
+//		
+//		// Exercise
+//		JsonClass actual = new JsonClass(jsonString);
+//		
+//		// Verify
+//		assertThat(actual.getValue("list"), is(not(nullValue())));
+//	}
+//	
+//	static final class JsonList {
+//		private List<SimpleJson> list = new ArrayList<SimpleJson>();
+//		
+//		public void add(SimpleJson obj) {
+//			list.add(obj);
+//		}
+//	}
+//}
 }
