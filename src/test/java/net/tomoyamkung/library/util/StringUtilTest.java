@@ -24,6 +24,30 @@ public class StringUtilTest {
 	}
 	
 	@RunWith(Theories.class)	
+	public static class RemoveFirstAndLastCharacter {
+		
+		@DataPoints
+		public static Fixture[] PARAMS = {
+			new Fixture(null, ""),
+			new Fixture("", ""),
+			new Fixture("a", ""),
+			new Fixture("ab", ""),
+			new Fixture("abc", "b"),
+		};
+		
+		@Theory
+		public void test(Fixture p) throws Exception {
+			// Setup
+			// Exercise
+			String actual = StringUtil.removeFirstAndLastCharacter(p.target);
+			
+			// Verify
+			assertThat(actual, is(p.expected));
+		}
+		
+	}
+	
+	@RunWith(Theories.class)	
 	public static class toLowerSnakeCase {
 
 		@DataPoints

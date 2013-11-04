@@ -136,4 +136,33 @@ public class StringUtil {
 	public static String removeUnderScore(String target) {
 		return StringUtils.remove(target, "_");
 	}
+	
+	/**
+	 * 文字列の先頭と末尾の文字を削除する。
+	 * 
+	 * 動作は以下の通り。
+	 * 
+	 * <ul>
+	 * <li>value が null → ブランク</li>
+	 * <li>value が ブランク → ブランク</li>
+	 * <li>value が "a" → ブランク</li>
+	 * <li>value が "ab" → ブランク</li>
+	 * <li>value が "abc" → "b"</li>
+	 * </ul>
+	 * 
+	 * @param value
+	 * @return
+	 */
+	public static String removeFirstAndLastCharacter(String value) {
+		if(StringUtil.isNullOrEmpty(value)) {
+			return "";
+		}
+		
+		if(value.length() < 3) {
+			return "";
+		}
+		
+		String x = value.substring(1).trim();
+		return x.substring(0, x.length() - 1).trim();
+	}
 }
