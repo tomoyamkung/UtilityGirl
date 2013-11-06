@@ -165,4 +165,22 @@ public class StringUtil {
 		String x = value.substring(1).trim();
 		return x.substring(0, x.length() - 1).trim();
 	}
+	
+	/**
+	 * 文字列から指定した文字を削除する。
+	 * 
+	 * @param value 削除される文字列
+	 * @param deletes 削除する文字
+	 * @return
+	 */
+	public static String removeStrings(String value, String...removes) {
+		if(StringUtil.isNullOrEmpty(value)) {
+			return "";
+		}
+		
+		for(int i = 0; i < removes.length; i++) {
+			value = StringUtils.remove(value, removes[i]);
+		}
+		return value;
+	}
 }
