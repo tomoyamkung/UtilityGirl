@@ -1,16 +1,15 @@
 package net.tomoyamkung.library.model.json;
 
-import java.util.Arrays;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
+import net.tomoyamkung.library.model.json.attribute.JsonAttributeClass;
 import net.tomoyamkung.library.util.StringUtil;
 
 /**
- * JSON の全属性を String オブジェクトとして抽出する。
+ * JSON に定義されているオブジェクトを保持するクラス。
  * 
- * JSON をデシリアライズする前に属性の妥当性を確認する用途で作成したクラス。
+ * JSON をデシリアライズする前に、属性の妥当性を確認する用途で作成したクラス。
  * 
  * @author tomoyamkung
  * 
@@ -18,97 +17,50 @@ import net.tomoyamkung.library.util.StringUtil;
 public class JsonClass {
 
 	/**
-	 * 抽出した属性を保持する Map
+	 * 抽出したオブジェクトを保持するリスト。
 	 */
-	private Map<String, String> attributes;
+	private List<JsonAttributeClass> classes;
 
 	/**
-	 * 解析する JSON を受け取り、個々の属性に展開する。
+	 * 解析する JSON を受け取り、個々のオブジェクトに展開する。
 	 * 
-	 * @param jsonString
+	 * @param json
 	 *            解析する JSON
 	 */
-	public JsonClass(String jsonString) {
-		if (StringUtil.isNullOrEmpty(jsonString)) {
+	public JsonClass(String json) {
+		if (StringUtil.isNullOrEmpty(json)) {
 			return;
 		}
 
-		parse(jsonString.trim());
+		classes = new ArrayList<JsonAttributeClass>();
+		parse(json);
 	}
-
+	
 	/**
-	 * JSON を解析して属性を抽出する。
-	 * 
-	 * @param jsonString
-	 *            解析する JSON
-	 */
-	private void parse(String jsonString) {
-		attributes = new HashMap<String, String>();
-
-		String json = removeExtractWord(jsonString);
-		JsonAttributeSpliter spliter = new JsonAttributeSpliter(json);
-		while (spliter.hasNext()) {
-			JsonItem jsonItem = spliter.next();
-			String key = jsonItem.getName();
-			String value = jsonItem.getValue();
-			attributes.put(key, value);
-		}
-	}
-
-	/**
-	 * 属性名称や属性値を囲むダブルクォートやスペースなど不要な文字を取り除く。
+	 * JSON を解析してオブジェクトを抽出する。
 	 * 
 	 * @param json
-	 * @return
+	 *            解析する JSON
 	 */
-	private String removeExtractWord(String json) {
-		if (!json.startsWith("\"") && !json.startsWith("{")) {
-			return json;
+	private void parse(String json) {
+		JsonAttributeClassIterator spliter = new JsonAttributeClassIterator(json);
+		while (spliter.hasNext()) {
+			String jsonObjectString = spliter.next();
+			addClass(new JsonAttributeClass(jsonObjectString));
 		}
-
-		return StringUtil.removeFirstAndLastCharacter(json).trim();
 	}
 
 	/**
-	 * 属性の値を取得する。
+	 * <code>JsonAttributeClass</code> を保持するオブジェクトに追加する。
 	 * 
-	 * 該当する属性名が存在しない場合 null を返す。
-	 * 
-	 * @param attributeName
-	 *            取得する属性の名称
-	 * @return
+	 * @param jsonAttributeClass
 	 */
-	public String getString(String attributeName) {
-		if (attributes == null) {
-			return null;
-		}
-
-		if (StringUtil.isNullOrEmpty(attributeName)) {
-			return null;
-		}
-		
-		if (!attributes.containsKey(attributeName)) {
-			return null;
-		}
-
-		String value = attributes.get(attributeName);
-		return StringUtil.isNullOrEmpty(value) ? null : value;
+	private void addClass(JsonAttributeClass jsonAttributeClass) {
+		classes.add(jsonAttributeClass);
 	}
-
-	/**
-	 * 属性の値を取得する。
-	 * 
-	 * String オブジェクトを格納する List で返す。
-	 * 
-	 * @param attributeName 取得する属性の名称
-	 * @return
-	 */
-	public List<String> getList(String attributeName) {
-		String stringValue = getString(attributeName);
-		if(StringUtil.isNullOrEmpty(stringValue)) {
-			return null;
-		}
-		return Arrays.asList(stringValue.split(","));
+	
+	protected JsonAttributeClass get(int index) {
+		return classes.get(index);
 	}
 
 }
