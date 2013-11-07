@@ -10,7 +10,7 @@ import org.apache.commons.lang3.StringUtils;
  * @author tomoyamkung
  *
  */
-public class JsonAttributeClassSpliter {
+public class JsonAttributeClassIterator {
 	
 	/**
 	 * 属性の分解を開始するインデックス。
@@ -32,7 +32,7 @@ public class JsonAttributeClassSpliter {
 	 * 
 	 * @param json 解析する JSON
 	 */
-	public JsonAttributeClassSpliter(String json) {
+	public JsonAttributeClassIterator(String json) {
 		String jsonString = json.trim();
 		if(isList(jsonString)) {
 			jsonString = StringUtil.removeFirstAndLastCharacter(jsonString);

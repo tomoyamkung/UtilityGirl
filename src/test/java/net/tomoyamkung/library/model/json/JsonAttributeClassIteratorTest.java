@@ -13,7 +13,7 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 @RunWith(Enclosed.class)
-public class JsonAttributeClassSpliterTest {
+public class JsonAttributeClassIteratorTest {
 
 	public static class オブジェクトが1つの場合 {
 		
@@ -23,7 +23,7 @@ public class JsonAttributeClassSpliterTest {
 			String json = JsonUtil.serialize(DummyJson.create(), "");
 			
 			// Exercise
-			JsonAttributeClassSpliter sut = new JsonAttributeClassSpliter(json);
+			JsonAttributeClassIterator sut = new JsonAttributeClassIterator(json);
 			
 			// Verify
 			assertThat(sut.hasNext(), is(true));
@@ -41,7 +41,7 @@ public class JsonAttributeClassSpliterTest {
 			String json = JsonUtil.serialize(new DummyJsonList(), "");
 			
 			// Exercise
-			JsonAttributeClassSpliter sut = new JsonAttributeClassSpliter(json);
+			JsonAttributeClassIterator sut = new JsonAttributeClassIterator(json);
 			
 			// Verify
 			assertThat(sut.hasNext(), is(true));
