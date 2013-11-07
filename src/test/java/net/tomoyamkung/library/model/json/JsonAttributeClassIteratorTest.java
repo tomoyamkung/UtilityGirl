@@ -20,7 +20,7 @@ public class JsonAttributeClassIteratorTest {
 		@Test
 		public void test() throws Exception {
 			// Setup
-			String json = JsonUtil.serialize(DummyJson.create(), "");
+			String json = JsonUtil.serialize(DummyJson.newInstance(), "");
 			
 			// Exercise
 			Iterator<String> sut = new JsonAttributeClassIterator(json);
@@ -61,9 +61,9 @@ public class JsonAttributeClassIteratorTest {
 		
 		DummyJsonList() {
 			list = new ArrayList<DummyJson>();
-			list.add(DummyJson.create());
-			list.add(DummyJson.create("VALUE1", "VALUE2", "VALUE3"));
-			list.add(DummyJson.create("値１", "値２", "値３"));
+			list.add(DummyJson.newInstance());
+			list.add(DummyJson.newInstance("VALUE1", "VALUE2", "VALUE3"));
+			list.add(DummyJson.newInstance("値１", "値２", "値３"));
 		}
 
 		public List<DummyJson> getList() {
@@ -75,45 +75,4 @@ public class JsonAttributeClassIteratorTest {
 		}
 	}
 
-	static class DummyJson {
-		private String attr1 = "value1";
-		private String attr2 = "value2";
-		private String attr3 = "value3";
-		
-		static DummyJson create() {
-			return new DummyJson();
-		}
-		
-		static DummyJson create(String value1, String value2, String value3) {
-			DummyJson instance = new DummyJson();
-			instance.attr1 = value1;
-			instance.attr2 = value2;
-			instance.attr3 = value3;
-			return instance;
-		}
-
-		public String getAttr1() {
-			return attr1;
-		}
-
-		public void setAttr1(String attr1) {
-			this.attr1 = attr1;
-		}
-
-		public String getAttr2() {
-			return attr2;
-		}
-
-		public void setAttr2(String attr2) {
-			this.attr2 = attr2;
-		}
-
-		public String getAttr3() {
-			return attr3;
-		}
-
-		public void setAttr3(String attr3) {
-			this.attr3 = attr3;
-		}
-	}
 }
