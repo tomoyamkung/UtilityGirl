@@ -43,7 +43,7 @@ public class JsonClass {
 	 *            解析する JSON
 	 */
 	private void parse(String json) {
-		JsonAttributeClassIterator spliter = new JsonAttributeClassIterator(json);
+		Iterator<String> spliter = new JsonAttributeClassIterator(json);
 		while (spliter.hasNext()) {
 			String jsonObjectString = spliter.next();
 			addClass(new JsonAttributeClass(jsonObjectString));
