@@ -11,11 +11,6 @@ import org.apache.commons.lang3.StringUtils;
  *
  */
 public class JsonAttributeClassSpliter {
-
-	/**
-	 * 解析する JSON。
-	 */
-	private String json;
 	
 	/**
 	 * 属性の分解を開始するインデックス。
@@ -27,10 +22,10 @@ public class JsonAttributeClassSpliter {
 	 */
 	private int numOfObject;
 	
-	private int trimBegin = 0;
-	private int trimEnd = 0;
-	
-//	private Trimming trim;
+	/**
+	 * JSON をトリミングするクラス。
+	 */
+	private Trimming trim;
 
 	/**
 	 * 属性単位に分解する JSON を設定する。
@@ -38,15 +33,15 @@ public class JsonAttributeClassSpliter {
 	 * @param json 解析する JSON
 	 */
 	public JsonAttributeClassSpliter(String json) {
-		this.json = json.trim();
-		if(isList(this.json)) {
-			this.json = StringUtil.removeFirstAndLastCharacter(this.json);
-			this.json = removeLabel(this.json);
-			this.json = removeListBracket(this.json);
+		String jsonString = json.trim();
+		if(isList(jsonString)) {
+			jsonString = StringUtil.removeFirstAndLastCharacter(jsonString);
+			jsonString = removeLabel(jsonString);
+			jsonString = removeListBracket(jsonString);
 		}
 		
-		numOfObject = countObject(this.json);
-//		trim = new Trimming(this.json, "},{");
+		numOfObject = countObject(jsonString);
+		trim = new Trimming(jsonString, "},{");
 	}
 
 	/**
@@ -56,7 +51,7 @@ public class JsonAttributeClassSpliter {
 	 * @return
 	 */
 	private String removeListBracket(String json) {
-		return StringUtil.removeStrings(json, "[", "]");
+		return StringUtil.removeStrings(json, "[", "]").trim();
 	}
 
 	/**
@@ -66,7 +61,7 @@ public class JsonAttributeClassSpliter {
 	 * @return
 	 */
 	private String removeLabel(String json) {
-		return json.substring(json.indexOf(":") + 1);
+		return json.substring(json.indexOf(":") + 1).trim();
 	}
 
 	/**
@@ -104,27 +99,12 @@ public class JsonAttributeClassSpliter {
 	 * @return
 	 */
 	public String next() {
-		calculateNextTrimPoint();
-		String attributeEntryString = json.substring(trimBegin, trimEnd);
+		trim.shift();
+		String attributeEntryString = trim.execute();
 		if(attributeEntryString.startsWith(",")) {
 			attributeEntryString = StringUtil.removeFirstCharacter(attributeEntryString);
 		}
 		index++;
 		return attributeEntryString;
-	}
-
-	/**
-	 * 次のインデックスを計算する。
-	 * 
-	 * @return
-	 */
-	private void calculateNextTrimPoint() {
-		trimBegin = trimEnd;
-		trimEnd = json.indexOf("},{", trimBegin) + 1;
-		if(trimBegin == trimEnd) {
-			trimEnd = json.length();
-		} else if(trimEnd < trimBegin) {
-			trimEnd = json.length();
-		}
 	}
 }
