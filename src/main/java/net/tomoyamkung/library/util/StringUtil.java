@@ -162,8 +162,28 @@ public class StringUtil {
 			return "";
 		}
 		
-		String x = value.substring(1).trim();
-		return x.substring(0, x.length() - 1).trim();
+		String x = removeFirstCharacter(value);
+		return removeLastCharacter(x);
+	}
+
+	/**
+	 * 文字列の末尾の文字を削除する。
+	 * 
+	 * @param value 削除する文字列
+	 * @return
+	 */
+	private static String removeLastCharacter(String value) {
+		return value.substring(0, value.length() - 1).trim();
+	}
+
+	/**
+	 * 文字列の先頭の文字を削除する。
+	 * 
+	 * @param value 削除する文字列
+	 * @return
+	 */
+	private static String removeFirstCharacter(String value) {
+		return value.substring(1).trim();
 	}
 	
 	/**
