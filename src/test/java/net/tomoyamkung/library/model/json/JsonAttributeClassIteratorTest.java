@@ -23,7 +23,7 @@ public class JsonAttributeClassIteratorTest {
 			String json = JsonUtil.serialize(DummyJson.create(), "");
 			
 			// Exercise
-			JsonAttributeClassIterator sut = new JsonAttributeClassIterator(json);
+			Iterator<String> sut = new JsonAttributeClassIterator(json);
 			
 			// Verify
 			assertThat(sut.hasNext(), is(true));
@@ -41,7 +41,7 @@ public class JsonAttributeClassIteratorTest {
 			String json = JsonUtil.serialize(new DummyJsonList(), "");
 			
 			// Exercise
-			JsonAttributeClassIterator sut = new JsonAttributeClassIterator(json);
+			Iterator<String> sut = new JsonAttributeClassIterator(json);
 			
 			// Verify
 			assertThat(sut.hasNext(), is(true));

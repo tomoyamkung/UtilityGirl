@@ -10,7 +10,7 @@ import org.apache.commons.lang3.StringUtils;
  * @author tomoyamkung
  *
  */
-public class JsonAttributeClassIterator {
+public class JsonAttributeClassIterator implements Iterator<String>{
 	
 	/**
 	 * 属性の分解を開始するインデックス。
@@ -89,6 +89,7 @@ public class JsonAttributeClassIterator {
 	 * 
 	 * @return 分解可能な属性がある場合 true
 	 */
+	@Override
 	public boolean hasNext() {
 		return index < numOfObject;
 	}
@@ -98,6 +99,7 @@ public class JsonAttributeClassIterator {
 	 * 
 	 * @return
 	 */
+	@Override
 	public String next() {
 		trim.shift();
 		String attributeEntryString = trim.execute();
