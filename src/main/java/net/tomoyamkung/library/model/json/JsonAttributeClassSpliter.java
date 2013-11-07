@@ -1,15 +1,19 @@
 package net.tomoyamkung.library.model.json;
 
+import net.tomoyamkung.library.util.StringUtil;
+
+import org.apache.commons.lang3.StringUtils;
+
 /**
- * JSON を属性単位に分解するクラス。
+ * JSON を解析して、オブジェクト単位に分解するクラス。
  * 
  * @author tomoyamkung
  *
  */
-public class JsonAttributeSpliter {
+public class JsonAttributeClassSpliter {
 
 	/**
-	 * 分解する JSON。
+	 * 解析する JSON。
 	 */
 	private String json;
 	
@@ -17,14 +21,72 @@ public class JsonAttributeSpliter {
 	 * 属性の分解を開始するインデックス。
 	 */
 	private int index = 0;
+	
+	/**
+	 * JSON に定義されているオブジェクトの個数。
+	 */
+	private int numOfObject;
+	
+	private int trimBegin = 0;
+	private int trimEnd = 0;
+	
+//	private Trimming trim;
 
 	/**
 	 * 属性単位に分解する JSON を設定する。
 	 * 
-	 * @param json
+	 * @param json 解析する JSON
 	 */
-	public JsonAttributeSpliter(String json) {
-		this.json = json;
+	public JsonAttributeClassSpliter(String json) {
+		this.json = json.trim();
+		if(isList(this.json)) {
+			this.json = StringUtil.removeFirstAndLastCharacter(this.json);
+			this.json = removeLabel(this.json);
+			this.json = removeListBracket(this.json);
+		}
+		
+		numOfObject = countObject(this.json);
+//		trim = new Trimming(this.json, "},{");
+	}
+
+	/**
+	 * JSON がオブジェクトのリストを定義したものである場合、"[" と "]" を削除する。
+	 * 
+	 * @param json
+	 * @return
+	 */
+	private String removeListBracket(String json) {
+		return StringUtil.removeStrings(json, "[", "]");
+	}
+
+	/**
+	 * JSON がオブジェクトのリストを定義したものである場合、そのラベルを削除する。
+	 * 
+	 * @param json
+	 * @return
+	 */
+	private String removeLabel(String json) {
+		return json.substring(json.indexOf(":") + 1);
+	}
+
+	/**
+	 * JSON がオブジェクトのリストを定義したものであるかを問い合わせる。
+	 * 
+	 * @param json 調査する JSON
+	 * @return オブジェクトのリストを定義したものである場合 true
+	 */
+	private boolean isList(String json) {
+		return json.contains(":[{") && json.contains("}]");
+	}
+
+	/**
+	 * JSON に定義されているオブジェクトの個数をカウントする。
+	 * 
+	 * @param json 調査する JSON
+	 * @return
+	 */
+	private int countObject(String json) {
+		return StringUtils.countMatches(json, "},{") + 1;
 	}
 
 	/**
@@ -33,49 +95,36 @@ public class JsonAttributeSpliter {
 	 * @return 分解可能な属性がある場合 true
 	 */
 	public boolean hasNext() {
-		return -1 < getNextIndex();
+		return index < numOfObject;
 	}
 
 	/**
-	 * 分解した属性を取得する。
+	 * 分解したオブジェクトを取得する。
 	 * 
 	 * @return
 	 */
-	public JsonItem next() {
-		int nextIndex = getNextIndex();
-		String itemString = json.substring(index, nextIndex);
-		JsonItem jsonItem = new JsonItem(itemString);
-
-		index = nextIndex + 1;
-		return jsonItem;
+	public String next() {
+		calculateNextTrimPoint();
+		String attributeEntryString = json.substring(trimBegin, trimEnd);
+		if(attributeEntryString.startsWith(",")) {
+			attributeEntryString = StringUtil.removeFirstCharacter(attributeEntryString);
+		}
+		index++;
+		return attributeEntryString;
 	}
 
 	/**
-	 * 次のインデックスを取得する。
+	 * 次のインデックスを計算する。
 	 * 
 	 * @return
 	 */
-	private int getNextIndex() {
-		int candicate = json.indexOf(",", index);
-		if(candicate < 0) {
-			return candicate;
+	private void calculateNextTrimPoint() {
+		trimBegin = trimEnd;
+		trimEnd = json.indexOf("},{", trimBegin) + 1;
+		if(trimBegin == trimEnd) {
+			trimEnd = json.length();
+		} else if(trimEnd < trimBegin) {
+			trimEnd = json.length();
 		}
-		
-		String nextItemString = json.substring(index, candicate);
-		if(isListItem(nextItemString)) {
-			return json.indexOf("],", index) + 1;
-		}
-		return candicate;
 	}
-
-	/**
-	 * この属性値がリストであるかを問い合わせる。
-	 * 
-	 * @param itemString
-	 * @return リストであれば true
-	 */
-	private boolean isListItem(String itemString) {
-		return itemString.contains("[");
-	}
-
 }
