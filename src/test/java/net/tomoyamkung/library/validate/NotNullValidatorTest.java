@@ -11,16 +11,6 @@ import org.junit.runner.RunWith;
 @RunWith(Theories.class)
 public class NotNullValidatorTest {
 
-	static class Fixture {
-		String target;
-		boolean expected;
-
-		Fixture(String target, boolean expected) {
-			this.target = target;
-			this.expected = expected;
-		}
-	}
-
 	@DataPoints
 	public static Fixture[] PARAMS = {
 		new Fixture(null, false),
@@ -31,7 +21,7 @@ public class NotNullValidatorTest {
 	@Theory
 	public void test(Fixture p) throws Exception {
 		// Setup
-		NotNullValidator sut = new NotNullValidator();
+		Validator sut = new NotNullValidator();
 		
 		// Exercise
 		boolean actual = sut.execute(p.target);
