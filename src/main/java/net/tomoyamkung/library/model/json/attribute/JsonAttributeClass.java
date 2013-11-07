@@ -61,13 +61,11 @@ public class JsonAttributeClass {
 	/**
 	 * <code>JsonAttribute</code> を取得する。
 	 * 
-	 * メソッドのスコープが protected なのは、このメソッドの用途がテスト目的のため。
-	 * 
 	 * @param attributeName
 	 *            属性名
 	 * @return
 	 */
-	protected JsonAttribute get(String attributeName) {
+	public JsonAttribute get(String attributeName) {
 		return attributes.get(attributeName);
 	}
 
