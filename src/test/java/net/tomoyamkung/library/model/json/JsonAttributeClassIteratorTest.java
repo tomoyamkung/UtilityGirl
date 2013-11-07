@@ -69,10 +69,6 @@ public class JsonAttributeClassIteratorTest {
 		public List<DummyJson> getList() {
 			return list;
 		}
-
-		public void setList(List<DummyJson> list) {
-			this.list = list;
-		}
 	}
 
 }
