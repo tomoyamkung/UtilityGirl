@@ -59,7 +59,13 @@ public class JsonClass {
 		classes.add(jsonAttributeClass);
 	}
 	
-	protected JsonAttributeClass get(int index) {
+	/**
+	 * 抽出したオブジェクトを取得する。
+	 * 
+	 * @param index
+	 * @return
+	 */
+	public JsonAttributeClass get(int index) {
 		return classes.get(index);
 	}
 
