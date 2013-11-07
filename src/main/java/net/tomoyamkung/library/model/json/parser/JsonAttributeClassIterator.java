@@ -1,4 +1,4 @@
-package net.tomoyamkung.library.model.json;
+package net.tomoyamkung.library.model.json.parser;
 
 import net.tomoyamkung.library.model.string.Trimming;
 import net.tomoyamkung.library.util.StringUtil;

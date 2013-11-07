@@ -6,6 +6,8 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.tomoyamkung.library.model.json.parser.Iterator;
+import net.tomoyamkung.library.model.json.parser.JsonAttributeClassIterator;
 import net.tomoyamkung.library.util.JsonUtil;
 
 import org.junit.Test;

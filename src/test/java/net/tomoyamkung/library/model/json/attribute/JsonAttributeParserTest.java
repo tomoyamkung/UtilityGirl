@@ -2,6 +2,7 @@ package net.tomoyamkung.library.model.json.attribute;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
+import net.tomoyamkung.library.model.json.parser.JsonAttributeParser;
 import net.tomoyamkung.library.util.JsonUtil;
 import net.tomoyamkung.library.util.StringUtil;
 

@@ -3,6 +3,7 @@ package net.tomoyamkung.library.model.json.attribute;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.tomoyamkung.library.model.json.parser.JsonAttributeParser;
 import net.tomoyamkung.library.util.StringUtil;
 
 /**

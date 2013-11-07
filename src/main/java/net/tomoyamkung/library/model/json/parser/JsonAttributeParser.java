@@ -1,4 +1,6 @@
-package net.tomoyamkung.library.model.json.attribute;
+package net.tomoyamkung.library.model.json.parser;
+
+import net.tomoyamkung.library.model.json.attribute.JsonAttribute;
 
 /**
  * 属性のみ定義された JSON を解析するクラス。
