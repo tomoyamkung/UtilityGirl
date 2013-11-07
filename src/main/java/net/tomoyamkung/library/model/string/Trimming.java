@@ -1,4 +1,4 @@
-package net.tomoyamkung.library.model.json;
+package net.tomoyamkung.library.model.string;
 
 /**
  * 文字列をトリミングするクラス。

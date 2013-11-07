@@ -1,4 +1,4 @@
-package net.tomoyamkung.library.model.json;
+package net.tomoyamkung.library.model.string;
 
 /**
  * トリミングの開始位置と終了位置を扱うクラス。

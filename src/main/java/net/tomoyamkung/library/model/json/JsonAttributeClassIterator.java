@@ -1,5 +1,6 @@
 package net.tomoyamkung.library.model.json;
 
+import net.tomoyamkung.library.model.string.Trimming;
 import net.tomoyamkung.library.util.StringUtil;
 
 import org.apache.commons.lang3.StringUtils;
