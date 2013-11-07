@@ -172,7 +172,7 @@ public class StringUtil {
 	 * @param value 削除する文字列
 	 * @return
 	 */
-	private static String removeLastCharacter(String value) {
+	public static String removeLastCharacter(String value) {
 		return value.substring(0, value.length() - 1).trim();
 	}
 
@@ -182,7 +182,7 @@ public class StringUtil {
 	 * @param value 削除する文字列
 	 * @return
 	 */
-	private static String removeFirstCharacter(String value) {
+	public static String removeFirstCharacter(String value) {
 		return value.substring(1).trim();
 	}
 	
