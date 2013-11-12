@@ -98,4 +98,22 @@ public class IntegerUtil {
 		return intValue <= to;
 	}
 
+	/**
+	 * 引数の文字列が指定した値未満であるかを問い合わせる。
+	 * 
+	 * @param value
+	 *            検査する文字列
+	 * @param to
+	 *            比較する値
+	 * @return <code>value</code> が <code>to</code> 未満であれば true
+	 */
+	public static Boolean isLessThan(String value, int to) {
+		if (!isInteger(value)) {
+			return false;
+		}
+
+		int intValue = Integer.parseInt(value);
+		return intValue < to;
+	}
+
 }
