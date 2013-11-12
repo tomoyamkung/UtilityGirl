@@ -10,6 +10,65 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class IntegerUtilTest {
 
+	public static class IsLessThanOrEqual {
+
+		@Test
+		public void Nullの場合() throws Exception {
+			// Setup
+			// Exercise
+			// Verify
+			assertThat(IntegerUtil.isLessThanOrEqual(null, 0), is(false));
+		}
+
+		@Test
+		public void ブランクの場合() throws Exception {
+			// Setup
+			// Exercise
+			// Verify
+			assertThat(IntegerUtil.isLessThanOrEqual(null, 0), is(false));
+		}
+
+		@Test
+		public void 文字列の場合() throws Exception {
+			// Setup
+			// Exercise
+			// Verify
+			assertThat(IntegerUtil.isLessThanOrEqual("あ", 0), is(false));
+		}
+
+		@Test
+		public void 同じ値の場合() throws Exception {
+			// Setup
+			// Exercise
+			// Verify
+			assertThat(IntegerUtil.isLessThanOrEqual("0", 0), is(true));
+		}
+
+		@Test
+		public void 大きい値の場合() throws Exception {
+			// Setup
+			// Exercise
+			// Verify
+			assertThat(IntegerUtil.isLessThanOrEqual("1", 0), is(false));
+		}
+
+		@Test
+		public void 小さい値の場合() throws Exception {
+			// Setup
+			// Exercise
+			// Verify
+			assertThat(IntegerUtil.isLessThanOrEqual("-1", 0), is(true));
+		}
+
+		@Test
+		public void 負の値の場合() throws Exception {
+			// Setup
+			// Exercise
+			// Verify
+			assertThat(IntegerUtil.isLessThanOrEqual("-1", -1), is(true));
+		}
+	}
+
 	public static class IsGreaterThan {
 
 		@Test

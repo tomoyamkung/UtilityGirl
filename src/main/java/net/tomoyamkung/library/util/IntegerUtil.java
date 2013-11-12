@@ -63,7 +63,7 @@ public class IntegerUtil {
 	}
 
 	/**
-	 * 引数の文字列が指定した値以上であるかを問い合わせる。
+	 * 引数の文字列が指定した値よりも大きい値であるかを問い合わせる。
 	 * 
 	 * @param value
 	 *            検査する文字列
@@ -78,6 +78,24 @@ public class IntegerUtil {
 
 		int intValue = Integer.parseInt(value);
 		return to < intValue;
+	}
+
+	/**
+	 * 引数の文字列が指定した値以下であるかを問い合わせる。
+	 * 
+	 * @param value
+	 *            検査する文字列
+	 * @param to
+	 *            比較する値
+	 * @return <code>value</code> が <code>to</code> 以下であれば true
+	 */
+	public static Boolean isLessThanOrEqual(String value, int to) {
+		if (!isInteger(value)) {
+			return false;
+		}
+
+		int intValue = Integer.parseInt(value);
+		return intValue <= to;
 	}
 
 }
