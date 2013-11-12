@@ -40,12 +40,26 @@ public class IntegerUtil {
 			return false;
 		}
 
-		try {
-			int intValue = Integer.parseInt(value);
-			return min <= intValue && intValue <= max;
-		} catch (Exception e) {
+		int intValue = Integer.parseInt(value);
+		return min <= intValue && intValue <= max;
+	}
+
+	/**
+	 * 引数の文字列が指定した値以上であるかを問い合わせる。
+	 * 
+	 * @param value
+	 *            検査する文字列
+	 * @param to
+	 *            比較する値
+	 * @return <code>value</code> が <code>to</code> 以上であれば true
+	 */
+	public static Boolean isGreaterThanOrEqual(String value, int to) {
+		if (!isInteger(value)) {
 			return false;
 		}
+
+		int intValue = Integer.parseInt(value);
+		return to <= intValue;
 	}
 
 }
