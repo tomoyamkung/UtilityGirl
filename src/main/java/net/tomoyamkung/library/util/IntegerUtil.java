@@ -62,4 +62,22 @@ public class IntegerUtil {
 		return to <= intValue;
 	}
 
+	/**
+	 * 引数の文字列が指定した値以上であるかを問い合わせる。
+	 * 
+	 * @param value
+	 *            検査する文字列
+	 * @param to
+	 *            比較する値
+	 * @return <code>value</code> が <code>to</code> よりも大きい値であれば true
+	 */
+	public static Boolean isGreaterThan(String value, int to) {
+		if (!isInteger(value)) {
+			return false;
+		}
+
+		int intValue = Integer.parseInt(value);
+		return to < intValue;
+	}
+
 }
