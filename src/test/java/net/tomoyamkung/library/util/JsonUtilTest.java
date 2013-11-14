@@ -41,8 +41,8 @@ public class JsonUtilTest {
 			
 			// Verify
 			assertThat(actual, is(not(nullValue(JsonClass.class))));
-			assertThat(actual.get(0).get("user_id").getValue(), is(testJson.getUserId().toString()));
-			assertThat(actual.get(0).get("nickname").getValue(), is(testJson.getNickname()));
+			assertThat(actual.get(0).getValue("user_id"), is(testJson.getUserId().toString()));
+			assertThat(actual.get(0).getValue("nickname"), is(testJson.getNickname()));
 		}
 		
 		private static final class TestJson {

@@ -27,9 +27,9 @@ public class JsonClassTest {
 			JsonAttributeClass actual = new JsonClass(jsonString).get(0);
 			
 			// Verify
-			assertThat(actual.get("attr1").getValue(), is("value1"));
-			assertThat(actual.get("attr2").getValue(), is("value2"));
-			assertThat(actual.get("attr3").getValue(), is("value3"));
+			assertThat(actual.getValue("attr1"), is("value1"));
+			assertThat(actual.getValue("attr2"), is("value2"));
+			assertThat(actual.getValue("attr3"), is("value3"));
 		}
 	}
 	
@@ -43,19 +43,19 @@ public class JsonClassTest {
 			// Exercise
 			// Verify
 			JsonAttributeClass actual = new JsonClass(jsonString).get(0);
-			assertThat(actual.get("attr1").getValue(), is("value1"));
-			assertThat(actual.get("attr2").getValue(), is("value2"));
-			assertThat(actual.get("attr3").getValue(), is("value3"));
+			assertThat(actual.getValue("attr1"), is("value1"));
+			assertThat(actual.getValue("attr2"), is("value2"));
+			assertThat(actual.getValue("attr3"), is("value3"));
 			
 			actual = new JsonClass(jsonString).get(1);
-			assertThat(actual.get("attr1").getValue(), is("VALUE1"));
-			assertThat(actual.get("attr2").getValue(), is("VALUE2"));
-			assertThat(actual.get("attr3").getValue(), is("VALUE3"));
+			assertThat(actual.getValue("attr1"), is("VALUE1"));
+			assertThat(actual.getValue("attr2"), is("VALUE2"));
+			assertThat(actual.getValue("attr3"), is("VALUE3"));
 			
 			actual = new JsonClass(jsonString).get(2);
-			assertThat(actual.get("attr1").getValue(), is("値１"));
-			assertThat(actual.get("attr2").getValue(), is("値２"));
-			assertThat(actual.get("attr3").getValue(), is("値３"));
+			assertThat(actual.getValue("attr1"), is("値１"));
+			assertThat(actual.getValue("attr2"), is("値２"));
+			assertThat(actual.getValue("attr3"), is("値３"));
 			
 		}
 		

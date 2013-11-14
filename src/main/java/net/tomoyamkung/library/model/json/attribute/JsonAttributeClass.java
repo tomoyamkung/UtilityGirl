@@ -70,7 +70,7 @@ public class JsonAttributeClass {
 	 *            属性名
 	 * @return
 	 */
-	public JsonAttribute get(String attributeName) {
+	private JsonAttribute get(String attributeName) {
 		return attributes.get(attributeName);
 	}
 
@@ -84,7 +84,7 @@ public class JsonAttributeClass {
 	 *            属性名
 	 * @return
 	 */
-	private String getValue(String attributeName) {
+	public String getValue(String attributeName) {
 		JsonAttribute jsonAttribute = get(attributeName);
 		if (jsonAttribute == null) {
 			throw new NullPointerException(String.format("", attributeName));
