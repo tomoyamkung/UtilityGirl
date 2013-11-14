@@ -21,6 +21,31 @@ import org.codehaus.jackson.map.ObjectMapper;
 public class JsonUtil {
 
 	/**
+	 * シリアライズするオブジェクトに <code>Date</code> が含まれていた場合にフォーマットするデフォルト形式。
+	 */
+	private static final String DEFALUT_DATE_FORMAT = "yyyy/MM/dd HH:mm:ss";
+
+	/**
+	 * オブジェクトをシリアライズする。
+	 * 
+	 * フィールドに <code>Date</code> が含まれている場合は "yyyy/MM/dd HH:mm:ss" の形式でシリアライズする。
+	 * 
+	 * @param object
+	 *            シリアライズするクラス
+	 * @return JSON
+	 * @throws JsonGenerationException
+	 *             シリアライズに失敗した場合
+	 * @throws JsonMappingException
+	 *             シリアライズに失敗した場合
+	 * @throws IOException
+	 *             シリアライズに失敗した場合
+	 */
+	public static String serialize(Object object)
+			throws JsonGenerationException, JsonMappingException, IOException {
+		return serialize(object, DEFALUT_DATE_FORMAT);
+	}
+
+	/**
 	 * オブジェクトをシリアライズする。
 	 * 
 	 * @param object
@@ -66,18 +91,19 @@ public class JsonUtil {
 		mapper.setDateFormat(new SimpleDateFormat(dateFormat));
 		return mapper.readValue(jsonString, clazz);
 	}
-	
+
 	/**
 	 * JSON をオブジェクトにデシリアライズせずに、設定されていた全属性を String オブジェクトとして抽出する。
 	 * 
-	 * @param jsonString 抽出する JSON
+	 * @param jsonString
+	 *            抽出する JSON
 	 * @return
 	 */
 	public static JsonClass toJsonClass(String jsonString) {
-		if(StringUtil.isNullOrEmpty(jsonString)) {
+		if (StringUtil.isNullOrEmpty(jsonString)) {
 			return null;
 		}
 		return new JsonClass(jsonString);
-		
+
 	}
 }
