@@ -181,6 +181,32 @@ public class DateUtilTest {
 
 	}
 	
+	public static class DateToString {
+		
+		private static final String FORMAT_STRING = "yyyy/MM/dd";
+		
+		@Test
+		public void Nullの場合() throws Exception {
+			// Setup
+			// Exercise
+			// Verify
+			assertThat(DateUtil.dateToString(null, FORMAT_STRING), is(nullValue(String.class)));
+		}
+		
+		@Test
+		public void Dateオブジェクトの場合() throws Exception {
+			// Setup
+			String expected = "2013/10/10";
+			Date date = DateUtil.stringToDate(expected, FORMAT_STRING);
+			
+			// Exercise
+			String actual = DateUtil.dateToString(date, FORMAT_STRING);
+			
+			// Verify
+			assertThat(actual, is(expected));
+		}
+	}
+	
 	public static class StringToDate {
 		
 		private static final String FORMAT_STRING = "yyyy/MM/dd";

@@ -88,6 +88,27 @@ public class DateUtil {
 			return null;
 		}
 	}
+	
+	/**
+	 * <code>Date</code> 型のオブジェクトを文字列に変換する。
+	 * 
+	 * 次のケースでは Null を返す。
+	 * 
+	 * <ul>
+	 * <li><code>date</code> が null</li>
+	 * </ul>
+	 * 
+	 * @param date 変換する <code>Date</code> 型のオブジェクト
+	 * @param dateFormat <code>SimpleDateFormat</code> に設定する日付フォーマット
+	 * @return
+	 */
+	public static String dateToString(Date date, String dateFormat) {
+		if(date == null) {
+			return null;
+		}
+		
+		return new SimpleDateFormat(dateFormat).format(date);
+	}
 
 	/**
 	 * 日曜日であるかを問い合わせる。
