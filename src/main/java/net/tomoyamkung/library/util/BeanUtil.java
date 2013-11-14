@@ -1,5 +1,6 @@
 package net.tomoyamkung.library.util;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -52,13 +53,13 @@ public class BeanUtil {
 	/**
 	 * フィールドを一覧で取得する。
 	 * 
-	 * 自分自身に定義されているフィールドとスーパークラスに定義されているフィールドも取得対象とする。
+	 * 自分自身に定義されているフィールドと、全スーパークラスに定義されているフィールドも取得対象とする。
 	 * 
 	 * @param src
 	 *            取得するオブジェクト
 	 * @return
 	 */
-	private static <T1> List<Field> getFields(T1 src) {
+	public static <T1> List<Field> getFields(T1 src) {
 		List<Field> fields = new ArrayList<Field>();
 
 		fields.addAll(getDeclaredFields(src.getClass()));
@@ -68,6 +69,45 @@ public class BeanUtil {
 		}
 
 		return fields;
+	}
+
+	/**
+	 * フィールドを一覧で取得する。
+	 * 
+	 * 特定のアノテーションが付与されているフィールドは除外する。
+	 * 
+	 * フィールドは <code>BeanUtil{@link #getFields(Object)}</code> で取得する。
+	 * 
+	 * @param src
+	 *            取得するオブジェクト
+	 * @param excludeAnnotation
+	 *            取得から除外したいアノテーション
+	 * @return
+	 */
+	public static <T> List<Field> getFields(T src,
+			Class<? extends Annotation> excludeAnnotation) {
+		List<Field> fields = getFields(src);
+		for (int i = 0; i < fields.size(); i++) {
+			if (hasAnnotation(fields.get(i), excludeAnnotation)) {
+				fields.remove(i--);
+			}
+		}
+
+		return fields;
+	}
+
+	/**
+	 * <code>Field</code> に特定のアノテーションが付与されているかを問い合わせる。
+	 * 
+	 * @param field
+	 *            検査する <code>Field</code>
+	 * @param annotation
+	 *            付与されているかを問い合わせるアノテーション
+	 * @return 付与されている場合 true
+	 */
+	public static boolean hasAnnotation(Field field,
+			Class<? extends Annotation> annotation) {
+		return field.getAnnotation(annotation) != null;
 	}
 
 	/**
@@ -230,4 +270,5 @@ public class BeanUtil {
 		}
 		return objects;
 	}
+
 }

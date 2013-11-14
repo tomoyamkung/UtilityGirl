@@ -1,10 +1,11 @@
-package net.tomoyamkung.library.util;
+package net.tomoyamkung.library.util.beanutil;
 
 import java.util.Date;
 
 public class DummyCreateTestClass {
 
 	private String s;
+	@DummyExcludeAnnotation
 	private Integer i;
 	private Date d;
 	private Boolean b;

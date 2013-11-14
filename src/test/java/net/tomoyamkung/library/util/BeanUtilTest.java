@@ -3,10 +3,14 @@ package net.tomoyamkung.library.util;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
+import java.lang.reflect.Field;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import net.tomoyamkung.library.util.beanutil.DummyCreateTestClass;
+import net.tomoyamkung.library.util.beanutil.DummyExcludeAnnotation;
 
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
@@ -14,6 +18,35 @@ import org.junit.runner.RunWith;
 
 @RunWith(Enclosed.class)
 public class BeanUtilTest {
+	
+	public static class GetFields {
+		
+		@Test
+		public void 全てのフィールドを取得する() throws Exception {
+			// Setup
+			// Exercise
+			List<Field> actual = BeanUtil.getFields(new DummyCreateTestClass());
+			
+			// Verify
+			assertThat(actual.size(), is(4));
+			for(Field f : actual) {
+				StringUtil.isMatch(f.getName(), "s", "i", "d", "b");
+			}
+		}
+		
+		@Test
+		public void 特定のアノテーションが付与されているフィールドを除外する() throws Exception {
+			// Setup
+			// Exercise
+			List<Field> actual = BeanUtil.getFields(new DummyCreateTestClass(), DummyExcludeAnnotation.class);
+			
+			// Verify
+			assertThat(actual.size(), is(3));
+			for(Field f : actual) {
+				StringUtil.isMatch(f.getName(), "s", "d", "b");
+			}
+		}
+	}
 	
 	public static class Create {
 		
