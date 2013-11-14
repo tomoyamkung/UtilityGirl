@@ -1,9 +1,13 @@
 package net.tomoyamkung.library.util;
 
 import java.lang.reflect.Field;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import net.tomoyamkung.library.model.FieldValue;
 
@@ -58,10 +62,11 @@ public class BeanUtil {
 		List<Field> fields = new ArrayList<Field>();
 
 		fields.addAll(getDeclaredFields(src.getClass()));
-		for(Class<?> superClass : ClassUtils.getAllSuperclasses(src.getClass())) {
+		for (Class<?> superClass : ClassUtils
+				.getAllSuperclasses(src.getClass())) {
 			fields.addAll(getDeclaredFields(superClass));
 		}
-		
+
 		return fields;
 	}
 
@@ -102,9 +107,11 @@ public class BeanUtil {
 			field = e.getClass().getDeclaredField((fieldName));
 		} catch (NoSuchFieldException ex) {
 			try {
-				field = e.getClass().getDeclaredField(StringUtil.toLowerSnakeCase(fieldName));
+				field = e.getClass().getDeclaredField(
+						StringUtil.toLowerSnakeCase(fieldName));
 			} catch (NoSuchFieldException ex2) {
-				field = e.getClass().getDeclaredField(StringUtil.toLowerCamelCase(fieldName));
+				field = e.getClass().getDeclaredField(
+						StringUtil.toLowerCamelCase(fieldName));
 			}
 		}
 
@@ -144,5 +151,83 @@ public class BeanUtil {
 		}
 
 		field.set(dest, fieldValue.getValue());
+	}
+
+	/**
+	 * 指定のクラスを生成し、各フィールドを初期化する。
+	 * 
+	 * 初期化するフィールドとその値は、フィールド名とフィールド値を格納した <code>Map</code> で指定する。
+	 * 
+	 * @param clazz
+	 *            生成するクラス
+	 * @param fieldValue
+	 *            初期化するフィールドとその値を格納した <code>Map</code>
+	 * @return
+	 * @throws InstantiationException
+	 *             インスタンスの生成に失敗した場合
+	 * @throws IllegalAccessException
+	 *             インスタンスの生成に失敗した場合
+	 * @throws NoSuchFieldException
+	 *             該当するフィールドがクラスに定義されていなかった場合
+	 * @throws SecurityException
+	 *             該当するフィールドへのアクセスに失敗した場合
+	 */
+	public static <T> T create(Class<T> clazz, Map<String, Object> fieldValue)
+			throws InstantiationException, IllegalAccessException,
+			NoSuchFieldException, SecurityException {
+		T obj = clazz.newInstance();
+
+		for (Iterator<String> it = fieldValue.keySet().iterator(); it.hasNext();) {
+			String fieldName = it.next();
+			Field field = getField(fieldName, obj);
+			if (field == null) {
+				continue;
+			}
+
+			Object value = fieldValue.get(fieldName);
+			if (field.getType().equals(Integer.class)
+					&& value instanceof BigDecimal) {
+				// value は BigDecimal なのだが、field の型が Integer
+				// のパターンがあったので、`intValue()` にしている
+				value = ((BigDecimal) value).intValue();
+			} else if (field.getType().equals(java.util.Date.class)
+					&& value instanceof java.sql.Timestamp) {
+				java.sql.Timestamp ts = (java.sql.Timestamp) value;
+				value = new Date(ts.getTime());
+			}
+			field.set(obj, value);
+		}
+
+		return (T) obj;
+	}
+
+	/**
+	 * 指定のクラスを生成し、各フィールドを初期化する。
+	 * 
+	 * 初期化するフィールドとその値は、フィールド名とフィールド値を格納した <code>Map</code> で指定する。
+	 * 
+	 * @param clazz
+	 *            生成するクラス
+	 * @param fieldValue
+	 *            初期化するフィールドとその値を格納した <code>Map</code> を格納した <code>List</code>
+	 * @return
+	 * @throws InstantiationException
+	 *             インスタンスの生成に失敗した場合
+	 * @throws IllegalAccessException
+	 *             インスタンスの生成に失敗した場合
+	 * @throws NoSuchFieldException
+	 *             該当するフィールドがクラスに定義されていなかった場合
+	 * @throws SecurityException
+	 *             該当するフィールドへのアクセスに失敗した場合
+	 */
+	public static <T> List<T> creates(Class<T> clazz,
+			List<Map<String, Object>> fieldValues)
+			throws InstantiationException, IllegalAccessException,
+			NoSuchFieldException, SecurityException {
+		List<T> objects = new ArrayList<T>();
+		for (Map<String, Object> fieldValue : fieldValues) {
+			objects.add(create(clazz, fieldValue));
+		}
+		return objects;
 	}
 }

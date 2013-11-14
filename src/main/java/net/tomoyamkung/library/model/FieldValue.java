@@ -62,5 +62,4 @@ public class FieldValue {
 	public void setValue(Object value) {
 		this.value = value;
 	}
-
 }
