@@ -1,12 +1,10 @@
 package net.tomoyamkung.library.model.json.attribute;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import net.tomoyamkung.library.model.json.parser.JsonAttributeParser;
-import net.tomoyamkung.library.util.ListUtil;
 import net.tomoyamkung.library.util.StringUtil;
 import net.tomoyamkung.library.validate.Validator;
 
@@ -107,15 +105,17 @@ public class JsonAttributeClass {
 	 */
 	public List<String> validate(String attributeName,
 			List<Validator> validators, List<String> errorMessages) {
-		List<String> actualErrorMessages = new ArrayList<String>();
 		String value = getValue(attributeName);
 		for (int i = 0; i < validators.size(); i++) {
-			if (!validate(validators.get(i), value)) {
-				ListUtil.copy(errorMessages, i, actualErrorMessages);
+			if (validate(validators.get(i), value)) {
+				errorMessages.remove(i--);
+			}
+			if(i < 0) {
+				break;
 			}
 		}
 
-		return actualErrorMessages;
+		return errorMessages;
 	}
 
 	/**
