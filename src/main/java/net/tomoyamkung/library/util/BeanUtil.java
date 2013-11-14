@@ -88,26 +88,12 @@ public class BeanUtil {
 			Class<? extends Annotation> excludeAnnotation) {
 		List<Field> fields = getFields(src);
 		for (int i = 0; i < fields.size(); i++) {
-			if (hasAnnotation(fields.get(i), excludeAnnotation)) {
+			if (FieldUtil.hasAnnotation(fields.get(i), excludeAnnotation)) {
 				fields.remove(i--);
 			}
 		}
 
 		return fields;
-	}
-
-	/**
-	 * <code>Field</code> に特定のアノテーションが付与されているかを問い合わせる。
-	 * 
-	 * @param field
-	 *            検査する <code>Field</code>
-	 * @param annotation
-	 *            付与されているかを問い合わせるアノテーション
-	 * @return 付与されている場合 true
-	 */
-	public static boolean hasAnnotation(Field field,
-			Class<? extends Annotation> annotation) {
-		return field.getAnnotation(annotation) != null;
 	}
 
 	/**
