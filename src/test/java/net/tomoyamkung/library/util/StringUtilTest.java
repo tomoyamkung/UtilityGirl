@@ -22,6 +22,31 @@ public class StringUtilTest {
 			this.expected = expected;
 		}
 	}
+	
+	@RunWith(Theories.class)
+	public static class Cutoff {
+		
+		private static final int length = 30;
+		private static final String REPLACE_CHARACTER = "…";
+		
+		@DataPoints
+		public static Fixture[] PARAMS = {
+			new Fixture(null, ""),
+			new Fixture("", ""),
+			new Fixture(StringUtil.createString(length - 1), StringUtil.createString(length - 1)),
+			new Fixture(StringUtil.createString(length), StringUtil.createString(length)),
+			new Fixture(StringUtil.createString(length + 1), StringUtil.createString(length) + REPLACE_CHARACTER),
+		};
+		
+		@Theory
+		public void test(Fixture p) throws Exception {
+			// Setup
+			// Exercise
+			// Verify
+			assertThat(String.format("TARGET:%s EXPECTED:%s", p.target, p.expected),
+					StringUtil.cutoff(p.target, length, REPLACE_CHARACTER), is(p.expected));
+		}
+	}
 
 	public static class RemoveStrings {
 

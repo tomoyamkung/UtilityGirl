@@ -136,7 +136,7 @@ public class StringUtil {
 	public static String removeUnderScore(String target) {
 		return StringUtils.remove(target, "_");
 	}
-	
+
 	/**
 	 * 文字列の先頭と末尾の文字を削除する。
 	 * 
@@ -154,14 +154,14 @@ public class StringUtil {
 	 * @return
 	 */
 	public static String removeFirstAndLastCharacter(String value) {
-		if(StringUtil.isNullOrEmpty(value)) {
+		if (StringUtil.isNullOrEmpty(value)) {
 			return "";
 		}
-		
-		if(value.length() < 3) {
+
+		if (value.length() < 3) {
 			return "";
 		}
-		
+
 		String x = removeFirstCharacter(value);
 		return removeLastCharacter(x);
 	}
@@ -169,7 +169,8 @@ public class StringUtil {
 	/**
 	 * 文字列の末尾の文字を削除する。
 	 * 
-	 * @param value 削除する文字列
+	 * @param value
+	 *            削除する文字列
 	 * @return
 	 */
 	public static String removeLastCharacter(String value) {
@@ -179,28 +180,57 @@ public class StringUtil {
 	/**
 	 * 文字列の先頭の文字を削除する。
 	 * 
-	 * @param value 削除する文字列
+	 * @param value
+	 *            削除する文字列
 	 * @return
 	 */
 	public static String removeFirstCharacter(String value) {
 		return value.substring(1).trim();
 	}
-	
+
 	/**
 	 * 文字列から指定した文字を削除する。
 	 * 
-	 * @param value 削除される文字列
-	 * @param deletes 削除する文字
+	 * @param value
+	 *            削除される文字列
+	 * @param deletes
+	 *            削除する文字
 	 * @return
 	 */
-	public static String removeStrings(String value, String...removes) {
-		if(StringUtil.isNullOrEmpty(value)) {
+	public static String removeStrings(String value, String... removes) {
+		if (StringUtil.isNullOrEmpty(value)) {
 			return "";
 		}
-		
-		for(int i = 0; i < removes.length; i++) {
+
+		for (int i = 0; i < removes.length; i++) {
 			value = StringUtils.remove(value, removes[i]);
 		}
 		return value;
+	}
+
+	/**
+	 * 文字列を <code>length</code> で切り取る。
+	 * 
+	 * <code>length</code> を超えた場合は、その部分を <code>replaceCharacter</code> に置き換える。
+	 * <code>length</code> を超えない場合は、原文を返す。
+	 * 
+	 * @param value
+	 *            原文
+	 * @param length
+	 *            指定の長さ
+	 * @param replaceCharacter
+	 *            置き換える文字
+	 * @return
+	 */
+	public static String cutoff(String value, int length,
+			String replaceCharacter) {
+		if (value == null || value.length() == 0) {
+			return "";
+		}
+
+		if (value.length() <= length) {
+			return value;
+		}
+		return value.substring(0, length) + replaceCharacter;
 	}
 }
