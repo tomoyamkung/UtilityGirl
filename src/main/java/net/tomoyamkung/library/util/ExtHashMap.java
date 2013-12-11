@@ -8,9 +8,11 @@ import java.util.HashMap;
  * <code>HashMap#put</code> を連続して書けるように拡張したクラス。
  * 
  * @author tomoyamkung
- *
- * @param <K> キーとなる型パラメータ
- * @param <V> 値となる型パラメータ
+ * 
+ * @param <K>
+ *            キーとなる型パラメータ
+ * @param <V>
+ *            値となる型パラメータ
  */
 public class ExtHashMap<K, V> extends HashMap<K, V> {
 
@@ -19,8 +21,10 @@ public class ExtHashMap<K, V> extends HashMap<K, V> {
 	/**
 	 * 要素を追加する。
 	 * 
-	 * @param key キー
-	 * @param value 値
+	 * @param key
+	 *            キー
+	 * @param value
+	 *            値
 	 * @return
 	 */
 	public ExtHashMap<K, V> putThis(K key, V value) {

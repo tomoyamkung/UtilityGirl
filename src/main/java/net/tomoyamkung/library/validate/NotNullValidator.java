@@ -6,7 +6,7 @@ import net.tomoyamkung.library.util.StringUtil;
  * 値が格納されていることを確認するクラス。
  * 
  * @author tomoyamkung
- *
+ * 
  */
 public class NotNullValidator implements Validator {
 

@@ -19,64 +19,79 @@ import org.junit.runner.RunWith;
 
 @RunWith(Enclosed.class)
 public class JsonAttributeClassTest {
-	
+
 	public static class Validate {
-		
+
 		@Test
 		public void 妥当性確認にパスする場合() throws Exception {
 			// Setup
-			JsonAttributeClass sut = new JsonAttributeClass(JsonUtil.serialize(DummyJson.newInstance()));
-			List<Validator> validators = new ExtArrayList<Validator>().addThis(new NotNullValidator());
-			List<String> errorMessages = new ExtArrayList<String>().addThis("xxx");
-			
+			JsonAttributeClass sut = new JsonAttributeClass(
+					JsonUtil.serialize(DummyJson.newInstance()));
+			List<Validator> validators = new ExtArrayList<Validator>()
+					.addThis(new NotNullValidator());
+			List<String> errorMessages = new ExtArrayList<String>()
+					.addThis("xxx");
+
 			// Exercise
-			List<String> actualErrorMessage = sut.validate("attr1", validators, errorMessages);
-			
+			List<String> actualErrorMessage = sut.validate("attr1", validators,
+					errorMessages);
+
 			// Verify
 			assertThat(actualErrorMessage.isEmpty(), is(true));
 		}
-		
+
 		@Test
 		public void 妥当性確認にパスしない場合() throws Exception {
 			// Setup
 			String errorMessage = "xxx";
-			JsonAttributeClass sut = new JsonAttributeClass(JsonUtil.serialize(DummyJson.newInstance()));
-			List<Validator> validators = new ExtArrayList<Validator>().addThis(new IntegerValueValidator());
-			List<String> errorMessages = new ExtArrayList<String>().addThis(errorMessage);
-			
+			JsonAttributeClass sut = new JsonAttributeClass(
+					JsonUtil.serialize(DummyJson.newInstance()));
+			List<Validator> validators = new ExtArrayList<Validator>()
+					.addThis(new IntegerValueValidator());
+			List<String> errorMessages = new ExtArrayList<String>()
+					.addThis(errorMessage);
+
 			// Exercise
-			List<String> actualErrorMessage = sut.validate("attr1", validators, errorMessages);
-			
+			List<String> actualErrorMessage = sut.validate("attr1", validators,
+					errorMessages);
+
 			// Verify
 			assertThat(actualErrorMessage.size(), is(1));
 			assertThat(actualErrorMessage.get(0), is(errorMessage));
 		}
-		
+
 		@Test
 		public void 妥当性確認にパスしない場合_Validatorが2つの場合() throws Exception {
 			// Setup
 			String errorMessage1 = "x";
 			String errorMessage2 = "y";
-			JsonAttributeClass sut = new JsonAttributeClass(JsonUtil.serialize(DummyJson.newInstance(), ""));
-			List<Validator> validators = new ExtArrayList<Validator>().addThis(new IntegerValueValidator()).addThis(new IntegerGreaterThanValidator(1));
-			List<String> errorMessages = new ExtArrayList<String>().addThis(errorMessage1).addThis(errorMessage2);
-			
+			JsonAttributeClass sut = new JsonAttributeClass(JsonUtil.serialize(
+					DummyJson.newInstance(), ""));
+			List<Validator> validators = new ExtArrayList<Validator>().addThis(
+					new IntegerValueValidator()).addThis(
+					new IntegerGreaterThanValidator(1));
+			List<String> errorMessages = new ExtArrayList<String>().addThis(
+					errorMessage1).addThis(errorMessage2);
+
 			// Exercise
-			List<String> actualErrorMessage = sut.validate("attr1", validators, errorMessages);
-			
+			List<String> actualErrorMessage = sut.validate("attr1", validators,
+					errorMessages);
+
 			// Verify
 			assertThat(actualErrorMessage.size(), is(2));
 			assertThat(actualErrorMessage.get(0), is(errorMessage1));
 			assertThat(actualErrorMessage.get(1), is(errorMessage2));
 		}
-		
+
 		@Test(expected = NullPointerException.class)
 		public void 属性名の指定を間違えた場合() throws Exception {
 			// Setup
-			JsonAttributeClass sut = new JsonAttributeClass(JsonUtil.serialize(DummyJson.newInstance()));
-			List<Validator> validators = new ExtArrayList<Validator>().addThis(new NotNullValidator());
+			JsonAttributeClass sut = new JsonAttributeClass(
+					JsonUtil.serialize(DummyJson.newInstance()));
+			List<Validator> validators = new ExtArrayList<Validator>()
+					.addThis(new NotNullValidator());
 			List<String> errorMessages = new ExtArrayList<String>();
-			
+
 			// Exercise
 			sut.validate("not_found", validators, errorMessages);
 		}
@@ -86,21 +101,21 @@ public class JsonAttributeClassTest {
 	public void test() throws Exception {
 		// Setup
 		String json = JsonUtil.serialize(DummyJson.newInstance(), "");
-		
+
 		// Exercise
 		JsonAttributeClass sut = new JsonAttributeClass(json);
-				
+
 		// Verify
 		assertThat(sut.getValue("attr1"), is("value1"));
 		assertThat(sut.getValue("attr2"), is("value2"));
 		assertThat(sut.getValue("attr3"), is("value3"));
 	}
-	
+
 	@Test(expected = NullPointerException.class)
 	public void 定義されていない属性名称を指定した場合() throws Exception {
 		// Setup
 		String json = JsonUtil.serialize(DummyJson.newInstance(), "");
-		
+
 		// Exercise
 		JsonAttributeClass sut = new JsonAttributeClass(json);
 

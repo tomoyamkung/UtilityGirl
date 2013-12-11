@@ -37,7 +37,7 @@ public class JsonClass {
 		classes = new ArrayList<JsonAttributeClass>();
 		parse(json);
 	}
-	
+
 	/**
 	 * JSON を解析してオブジェクトを抽出する。
 	 * 
@@ -60,7 +60,7 @@ public class JsonClass {
 	private void addClass(JsonAttributeClass jsonAttributeClass) {
 		classes.add(jsonAttributeClass);
 	}
-	
+
 	/**
 	 * 抽出したオブジェクトを取得する。
 	 * 

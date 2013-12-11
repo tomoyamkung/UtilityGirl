@@ -88,7 +88,7 @@ public class DateUtil {
 			return null;
 		}
 	}
-	
+
 	/**
 	 * <code>Date</code> 型のオブジェクトを文字列に変換する。
 	 * 
@@ -98,15 +98,17 @@ public class DateUtil {
 	 * <li><code>date</code> が null</li>
 	 * </ul>
 	 * 
-	 * @param date 変換する <code>Date</code> 型のオブジェクト
-	 * @param dateFormat <code>SimpleDateFormat</code> に設定する日付フォーマット
+	 * @param date
+	 *            変換する <code>Date</code> 型のオブジェクト
+	 * @param dateFormat
+	 *            <code>SimpleDateFormat</code> に設定する日付フォーマット
 	 * @return
 	 */
 	public static String dateToString(Date date, String dateFormat) {
-		if(date == null) {
+		if (date == null) {
 			return null;
 		}
-		
+
 		return new SimpleDateFormat(dateFormat).format(date);
 	}
 
@@ -137,33 +139,35 @@ public class DateUtil {
 	/**
 	 * 開始日と終了日を含んだ日付の一覧を取得する。
 	 * 
-	 * @param begin 開始日
-	 * @param end 終了日
+	 * @param begin
+	 *            開始日
+	 * @param end
+	 *            終了日
 	 * @return
 	 */
 	public static List<Date> getTeamDates(Date begin, Date end) {
-		if(begin == null || end == null) {
+		if (begin == null || end == null) {
 			return new ArrayList<Date>();
 		}
-		
-		if(end.before(begin)) {
+
+		if (end.before(begin)) {
 			return new ArrayList<Date>();
 		}
-		
+
 		List<Date> dates = new ArrayList<Date>();
-		if(DateUtils.isSameDay(end, begin)) {
+		if (DateUtils.isSameDay(end, begin)) {
 			dates.add(begin);
 			return dates;
 		}
-		
+
 		Date targetDate = begin;
-		while(!DateUtils.isSameDay(targetDate, end)) {
+		while (!DateUtils.isSameDay(targetDate, end)) {
 			dates.add(targetDate);
 			targetDate = DateUtils.addDays(targetDate, 1);
 		}
 		dates.add(targetDate);
-		
+
 		return dates;
 	}
-	
+
 }

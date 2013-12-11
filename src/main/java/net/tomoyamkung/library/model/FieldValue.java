@@ -6,44 +6,49 @@ import java.lang.reflect.Field;
  * フィールドの名称と値を保持するクラス。
  * 
  * @author tomoyamkung
- *
+ * 
  */
 public class FieldValue {
-	
+
 	/**
 	 * フィールドの名称。
 	 */
 	private String name;
-	
+
 	/**
 	 * フィールドの値。
 	 */
 	private Object value;
-	
+
 	/**
 	 * 保持するフィールドの名称と値を設定する。
 	 * 
-	 * @param name フィールドの名称
-	 * @param value フィールドの値
+	 * @param name
+	 *            フィールドの名称
+	 * @param value
+	 *            フィールドの値
 	 */
 	public FieldValue(String name, Object value) {
 		this.name = name;
-		
-		if(value == null) {
+
+		if (value == null) {
 			return;
 		}
 		this.value = value;
 	}
-	
+
 	/**
 	 * 保持するフィールドの名称と値を設定する。
 	 * 
-	 * @param src フィールドオブジェクト
-	 * @param obj <code>src</code> を保持しているオブジェクト
+	 * @param src
+	 *            フィールドオブジェクト
+	 * @param obj
+	 *            <code>src</code> を保持しているオブジェクト
 	 * @throws IllegalArgumentException
 	 * @throws IllegalAccessException
 	 */
-	public <T> FieldValue(Field src, T obj) throws IllegalArgumentException, IllegalAccessException {
+	public <T> FieldValue(Field src, T obj) throws IllegalArgumentException,
+			IllegalAccessException {
 		this(src.getName(), src.get(obj));
 	}
 

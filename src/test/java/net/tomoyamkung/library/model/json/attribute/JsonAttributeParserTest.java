@@ -15,18 +15,18 @@ public class JsonAttributeParserTest {
 		// Setup
 		String json = JsonUtil.serialize(DummyJson.create(), "");
 		json = StringUtil.removeStrings(json, "{", "}", "\"");
-		
+
 		// Exercise
 		JsonAttributeParser sut = new JsonAttributeParser(json);
 		JsonAttribute actual = sut.create();
-		
+
 		// Verify
 		assertThat(actual.getName(), is("attr1"));
 		assertThat(actual.getValue(), is("value1"));
 	}
-	
+
 	static class DummyJson {
-		
+
 		private String attr1 = "value1";
 
 		public static DummyJson create() {

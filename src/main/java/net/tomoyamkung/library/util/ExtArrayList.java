@@ -8,8 +8,9 @@ import java.util.ArrayList;
  * <code>ArrayList#add</code> を連続して書けるように拡張したクラス。
  * 
  * @author tomoyamkung
- *
- * @param <E> 型パラメータ
+ * 
+ * @param <E>
+ *            型パラメータ
  */
 public class ExtArrayList<E> extends ArrayList<E> {
 
@@ -18,7 +19,8 @@ public class ExtArrayList<E> extends ArrayList<E> {
 	/**
 	 * 要素を追加する。
 	 * 
-	 * @param element 要素
+	 * @param element
+	 *            要素
 	 * @return
 	 */
 	public ExtArrayList<E> addThis(E element) {

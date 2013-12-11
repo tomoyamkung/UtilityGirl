@@ -7,7 +7,7 @@ import net.tomoyamkung.library.validate.Validator;
  * 値が指定の範囲内であることを確認するクラス。
  * 
  * @author tomoyamkung
- *
+ * 
  */
 public class DoubleRangeValidator implements Validator {
 
@@ -15,7 +15,7 @@ public class DoubleRangeValidator implements Validator {
 	 * 最小値。
 	 */
 	private double min;
-	
+
 	/**
 	 * 最大値。
 	 */
@@ -24,8 +24,10 @@ public class DoubleRangeValidator implements Validator {
 	/**
 	 * 値のとりうる範囲を設定する。
 	 * 
-	 * @param min 最小値
-	 * @param max 最大値
+	 * @param min
+	 *            最小値
+	 * @param max
+	 *            最大値
 	 */
 	public DoubleRangeValidator(double min, double max) {
 		this.min = min;

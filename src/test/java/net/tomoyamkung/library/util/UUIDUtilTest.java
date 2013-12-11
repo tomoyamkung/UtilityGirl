@@ -12,7 +12,7 @@ public class UUIDUtilTest {
 		// Setup
 		// Exercise
 		String actual = UUIDUtil.createType4();
-		
+
 		// Verify
 		assertThat("ブランクで生成されないこと", actual, is(not(nullValue(String.class))));
 		assertThat("生成される UUID の長さが 36 であること", actual.length(), is(36));

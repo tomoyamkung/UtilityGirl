@@ -9,20 +9,20 @@ import org.apache.commons.lang3.StringUtils;
  * JSON を解析して、オブジェクト単位に分解するクラス。
  * 
  * @author tomoyamkung
- *
+ * 
  */
-public class JsonAttributeClassIterator implements Iterator<String>{
-	
+public class JsonAttributeClassIterator implements Iterator<String> {
+
 	/**
 	 * 属性の分解を開始するインデックス。
 	 */
 	private int index = 0;
-	
+
 	/**
 	 * JSON に定義されているオブジェクトの個数。
 	 */
 	private int numOfObject;
-	
+
 	/**
 	 * JSON をトリミングするクラス。
 	 */
@@ -31,16 +31,17 @@ public class JsonAttributeClassIterator implements Iterator<String>{
 	/**
 	 * 属性単位に分解する JSON を設定する。
 	 * 
-	 * @param json 解析する JSON
+	 * @param json
+	 *            解析する JSON
 	 */
 	public JsonAttributeClassIterator(String json) {
 		String jsonString = json.trim();
-		if(isList(jsonString)) {
+		if (isList(jsonString)) {
 			jsonString = StringUtil.removeFirstAndLastCharacter(jsonString);
 			jsonString = removeLabel(jsonString);
 			jsonString = removeListBracket(jsonString);
 		}
-		
+
 		numOfObject = countObject(jsonString);
 		trim = new Trimming(jsonString, "},{");
 	}
@@ -68,7 +69,8 @@ public class JsonAttributeClassIterator implements Iterator<String>{
 	/**
 	 * JSON がオブジェクトのリストを定義したものであるかを問い合わせる。
 	 * 
-	 * @param json 調査する JSON
+	 * @param json
+	 *            調査する JSON
 	 * @return オブジェクトのリストを定義したものである場合 true
 	 */
 	private boolean isList(String json) {
@@ -78,7 +80,8 @@ public class JsonAttributeClassIterator implements Iterator<String>{
 	/**
 	 * JSON に定義されているオブジェクトの個数をカウントする。
 	 * 
-	 * @param json 調査する JSON
+	 * @param json
+	 *            調査する JSON
 	 * @return
 	 */
 	private int countObject(String json) {
@@ -104,8 +107,9 @@ public class JsonAttributeClassIterator implements Iterator<String>{
 	public String next() {
 		trim.shift();
 		String attributeEntryString = trim.execute();
-		if(attributeEntryString.startsWith(",")) {
-			attributeEntryString = StringUtil.removeFirstCharacter(attributeEntryString);
+		if (attributeEntryString.startsWith(",")) {
+			attributeEntryString = StringUtil
+					.removeFirstCharacter(attributeEntryString);
 		}
 		index++;
 		return attributeEntryString;

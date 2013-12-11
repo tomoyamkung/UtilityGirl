@@ -6,15 +6,15 @@ import net.tomoyamkung.library.model.json.attribute.JsonAttribute;
  * 属性のみ定義された JSON を解析するクラス。
  * 
  * @author tomoyamkung
- *
+ * 
  */
 public class JsonAttributeParser {
-	
+
 	/**
 	 * 属性名称。
 	 */
 	private String name;
-	
+
 	/**
 	 * 属性値。
 	 */
@@ -31,7 +31,7 @@ public class JsonAttributeParser {
 		name = extractName(json.trim());
 		value = extractValue(json.trim());
 	}
-	
+
 	/**
 	 * 属性名称を抽出する。
 	 * 
@@ -57,7 +57,7 @@ public class JsonAttributeParser {
 	private int indexOfDelimiter(String json) {
 		return json.indexOf(":");
 	}
-	
+
 	/**
 	 * <code>JsonAttribute</code> オブジェクトを生成する。
 	 * 
@@ -66,5 +66,5 @@ public class JsonAttributeParser {
 	public JsonAttribute create() {
 		return new JsonAttribute(name, value);
 	}
-	
+
 }

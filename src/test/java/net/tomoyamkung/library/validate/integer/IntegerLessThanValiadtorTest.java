@@ -2,7 +2,7 @@ package net.tomoyamkung.library.validate.integer;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
-import net.tomoyamkung.library.validate.Fixture;
+import net.tomoyamkung.library.Fixture;
 import net.tomoyamkung.library.validate.Validator;
 
 import org.junit.experimental.theories.DataPoints;
@@ -13,21 +13,21 @@ import org.junit.runner.RunWith;
 @RunWith(Theories.class)
 public class IntegerLessThanValiadtorTest {
 
+	@SuppressWarnings("rawtypes")
 	@DataPoints
 	public static Fixture[] PARAMS = {
-		new Fixture(null, false),
-		new Fixture("", false),
-		new Fixture("あ", false),
-		new Fixture("0", false),
-		new Fixture("1", false),
-		new Fixture("-1", true)
-	};
+			new Fixture<String, Boolean>(null, false),
+			new Fixture<String, Boolean>("", false),
+			new Fixture<String, Boolean>("あ", false),
+			new Fixture<String, Boolean>("0", false),
+			new Fixture<String, Boolean>("1", false),
+			new Fixture<String, Boolean>("-1", true) };
 
 	@Theory
-	public void test(Fixture p) throws Exception {
+	public void test(Fixture<String, Boolean> p) throws Exception {
 		// Setup
 		Validator sut = new IntegerLessThanValiadtor(0);
-		
+
 		// Exercise
 		boolean actual = sut.execute(p.target);
 

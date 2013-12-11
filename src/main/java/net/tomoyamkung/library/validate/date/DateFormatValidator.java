@@ -9,10 +9,10 @@ import net.tomoyamkung.library.validate.Validator;
  * 値が指定の日付フォーマットであることを確認するクラス。
  * 
  * @author tomoyamkung
- *
+ * 
  */
 public class DateFormatValidator implements Validator {
-	
+
 	private static SimpleDateFormat dateFormat;
 
 	/**

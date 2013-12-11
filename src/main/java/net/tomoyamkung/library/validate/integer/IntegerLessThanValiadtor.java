@@ -7,10 +7,10 @@ import net.tomoyamkung.library.validate.Validator;
  * 値が指定値未満であることを確認するクラス。
  * 
  * @author tomoyamkung
- *
+ * 
  */
 public class IntegerLessThanValiadtor implements Validator {
-	
+
 	/**
 	 * 指定値。
 	 */

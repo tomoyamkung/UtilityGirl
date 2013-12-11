@@ -37,9 +37,12 @@ public class DummyJson {
 	/**
 	 * インスタンスを生成する。
 	 * 
-	 * @param value1 属性１に設定する値
-	 * @param value2 属性２に設定する値
-	 * @param value3 属性３に設定する値
+	 * @param value1
+	 *            属性１に設定する値
+	 * @param value2
+	 *            属性２に設定する値
+	 * @param value3
+	 *            属性３に設定する値
 	 * @return
 	 */
 	public static DummyJson newInstance(String value1, String value2,

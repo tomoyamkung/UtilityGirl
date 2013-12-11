@@ -21,7 +21,7 @@ public class JsonUtilTest {
 			// Verify
 			assertThat(JsonUtil.toJsonClass(null), is(nullValue()));
 		}
-		
+
 		@Test
 		public void ブランクの場合() {
 			// Setup
@@ -29,35 +29,38 @@ public class JsonUtilTest {
 			// Verify
 			assertThat(JsonUtil.toJsonClass(""), is(nullValue()));
 		}
-		
+
 		@Test
 		public void test() throws Exception {
 			// Setup
 			TestJson testJson = new TestJson();
 			String jsonString = JsonUtil.serialize(new TestJson(), "");
-			
+
 			// Exercise
 			JsonClass actual = JsonUtil.toJsonClass(jsonString);
-			
+
 			// Verify
 			assertThat(actual, is(not(nullValue(JsonClass.class))));
-			assertThat(actual.get(0).getValue("user_id"), is(testJson.getUserId().toString()));
-			assertThat(actual.get(0).getValue("nickname"), is(testJson.getNickname()));
+			assertThat(actual.get(0).getValue("user_id"), is(testJson
+					.getUserId().toString()));
+			assertThat(actual.get(0).getValue("nickname"),
+					is(testJson.getNickname()));
 		}
-		
+
 		private static final class TestJson {
-			
+
 			@JsonProperty("user_id")
 			private Integer user_id = 100;
 			private String nickname = "ニックネーム";
-			
+
 			public Integer getUserId() {
 				return user_id;
 			}
+
 			public String getNickname() {
 				return nickname;
 			}
 		}
-		
+
 	}
 }

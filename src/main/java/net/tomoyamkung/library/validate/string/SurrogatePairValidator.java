@@ -7,16 +7,16 @@ import net.tomoyamkung.library.validate.Validator;
  * 文字列にサロゲートペアが含まれていないことを確認するクラス。
  * 
  * @author tomoyamkung
- *
+ * 
  */
 public class SurrogatePairValidator implements Validator {
 
 	@Override
 	public boolean execute(String value) {
-		if(StringUtil.isNullOrEmpty(value)) {
+		if (StringUtil.isNullOrEmpty(value)) {
 			return false;
 		}
-		
+
 		for (char c : value.toCharArray()) {
 			if (isSurrogatePairCharacter(c)) {
 				return false;
@@ -25,7 +25,7 @@ public class SurrogatePairValidator implements Validator {
 
 		return true;
 	}
-	
+
 	/**
 	 * サロゲートペアであるか問い合わせる。
 	 * 

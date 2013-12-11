@@ -68,7 +68,7 @@ public class IntegerUtilTest {
 			assertThat(IntegerUtil.isLessThan("-1", -1), is(false));
 		}
 	}
-	
+
 	public static class IsLessThanOrEqual {
 
 		@Test

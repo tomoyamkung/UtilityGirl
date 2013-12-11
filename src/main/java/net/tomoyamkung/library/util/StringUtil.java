@@ -2,6 +2,8 @@ package net.tomoyamkung.library.util;
 
 import static com.google.common.base.CaseFormat.*;
 
+import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -232,5 +234,29 @@ public class StringUtil {
 			return value;
 		}
 		return value.substring(0, length) + replaceCharacter;
+	}
+
+	/**
+	 * 空白繋ぎの文字列に結合する。
+	 * 
+	 * CSV の「カンマ」を「空白」に変更したものを返す。
+	 * 
+	 * @param values
+	 *            結合する文字列を格納したリスト
+	 * @return
+	 */
+	public static String toWhiteSpaceSeparatedValue(List<String> values) {
+		if (values == null || values.isEmpty()) {
+			return "";
+		}
+
+		StringBuilder builer = new StringBuilder();
+		for (String value : values) {
+			builer.append(value).append(" ");
+		}
+		if (!values.isEmpty()) {
+			builer.delete(builer.length() - 1, builer.length());
+		}
+		return builer.toString();
 	}
 }

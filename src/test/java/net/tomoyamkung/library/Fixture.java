@@ -1,30 +1,34 @@
-package net.tomoyamkung.library.validate;
+package net.tomoyamkung.library;
 
 /**
  * テストの検証値と期待値を格納した Fixture クラス。
  * 
  * @author tomoyamkung
- *
+ * 
+ * @param <T1>
+ * @param <T2>
  */
-public class Fixture {
-	
+public class Fixture<T1, T2> {
+
 	/**
 	 * テストの検証値。
 	 */
-	public String target;
-	
+	public T1 target;
+
 	/**
 	 * テストの期待値。
 	 */
-	public boolean expected;
+	public T2 expected;
 
 	/**
 	 * テストの検証値と期待値を設定する。
 	 * 
-	 * @param target テストの検証値
-	 * @param expected テストの期待値
+	 * @param target
+	 *            テストの検証値
+	 * @param expected
+	 *            テストの期待値
 	 */
-	public Fixture(String target, boolean expected) {
+	public Fixture(T1 target, T2 expected) {
 		this.target = target;
 		this.expected = expected;
 	}

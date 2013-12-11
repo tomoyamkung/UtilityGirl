@@ -110,7 +110,7 @@ public class JsonAttributeClass {
 			if (validate(validators.get(i), value)) {
 				errorMessages.remove(i--);
 			}
-			if(i < 0) {
+			if (i < 0) {
 				break;
 			}
 		}

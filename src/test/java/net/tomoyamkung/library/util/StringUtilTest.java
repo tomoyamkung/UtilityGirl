@@ -3,6 +3,11 @@ package net.tomoyamkung.library.util;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import net.tomoyamkung.library.Fixture;
+
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.experimental.theories.DataPoints;
@@ -13,38 +18,59 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class StringUtilTest {
 
-	static class Fixture {
-		String target;
-		String expected;
-
-		Fixture(String target, String expected) {
-			this.target = target;
-			this.expected = expected;
-		}
-	}
-	
 	@RunWith(Theories.class)
-	public static class Cutoff {
-		
-		private static final int length = 30;
-		private static final String REPLACE_CHARACTER = "…";
-		
+	public static class ToWhiteSpaceSeparatedValue {
+
+		static List<String> list = new ExtArrayList<String>().addThis("a")
+				.addThis("b").addThis("c");
+
+		@SuppressWarnings("rawtypes")
 		@DataPoints
 		public static Fixture[] PARAMS = {
-			new Fixture(null, ""),
-			new Fixture("", ""),
-			new Fixture(StringUtil.createString(length - 1), StringUtil.createString(length - 1)),
-			new Fixture(StringUtil.createString(length), StringUtil.createString(length)),
-			new Fixture(StringUtil.createString(length + 1), StringUtil.createString(length) + REPLACE_CHARACTER),
-		};
-		
+				new Fixture<List<String>, String>(null, ""),
+				new Fixture<List<String>, String>(new ArrayList<String>(), ""),
+				new Fixture<List<String>, String>(list, "a b c") };
+
 		@Theory
-		public void test(Fixture p) throws Exception {
+		public void test(Fixture<List<String>, String> p) throws Exception {
 			// Setup
 			// Exercise
 			// Verify
-			assertThat(String.format("TARGET:%s EXPECTED:%s", p.target, p.expected),
-					StringUtil.cutoff(p.target, length, REPLACE_CHARACTER), is(p.expected));
+			assertThat(String.format("TARGET:%s EXPECTED:%s", p.target,
+					p.expected),
+					StringUtil.toWhiteSpaceSeparatedValue(p.target),
+					is(p.expected));
+		}
+	}
+
+	@RunWith(Theories.class)
+	public static class Cutoff {
+
+		private static final int length = 30;
+		private static final String REPLACE_CHARACTER = "…";
+
+		@SuppressWarnings("rawtypes")
+		@DataPoints
+		public static Fixture[] PARAMS = {
+				new Fixture<String, String>(null, ""),
+				new Fixture<String, String>("", ""),
+				new Fixture<String, String>(
+						StringUtil.createString(length - 1),
+						StringUtil.createString(length - 1)),
+				new Fixture<String, String>(StringUtil.createString(length),
+						StringUtil.createString(length)),
+				new Fixture<String, String>(
+						StringUtil.createString(length + 1),
+						StringUtil.createString(length) + REPLACE_CHARACTER), };
+
+		@Theory
+		public void test(Fixture<String, String> p) throws Exception {
+			// Setup
+			// Exercise
+			// Verify
+			assertThat(String.format("TARGET:%s EXPECTED:%s", p.target,
+					p.expected), StringUtil.cutoff(p.target, length,
+					REPLACE_CHARACTER), is(p.expected));
 		}
 	}
 
@@ -90,13 +116,17 @@ public class StringUtilTest {
 	@RunWith(Theories.class)
 	public static class RemoveFirstAndLastCharacter {
 
+		@SuppressWarnings("rawtypes")
 		@DataPoints
-		public static Fixture[] PARAMS = { new Fixture(null, ""),
-				new Fixture("", ""), new Fixture("a", ""),
-				new Fixture("ab", ""), new Fixture("abc", "b"), };
+		public static Fixture[] PARAMS = {
+				new Fixture<String, String>(null, ""),
+				new Fixture<String, String>("", ""),
+				new Fixture<String, String>("a", ""),
+				new Fixture<String, String>("ab", ""),
+				new Fixture<String, String>("abc", "b"), };
 
 		@Theory
-		public void test(Fixture p) throws Exception {
+		public void test(Fixture<String, String> p) throws Exception {
 			// Setup
 			// Exercise
 			String actual = StringUtil.removeFirstAndLastCharacter(p.target);
@@ -110,13 +140,14 @@ public class StringUtilTest {
 	@RunWith(Theories.class)
 	public static class toLowerSnakeCase {
 
+		@SuppressWarnings("rawtypes")
 		@DataPoints
 		public static Fixture[] PARAMS = {
-				new Fixture("createdAt", "created_at"),
-				new Fixture("DummyUser", "dummy_user"), };
+				new Fixture<String, String>("createdAt", "created_at"),
+				new Fixture<String, String>("DummyUser", "dummy_user"), };
 
 		@Theory
-		public void test(Fixture p) throws Exception {
+		public void test(Fixture<String, String> p) throws Exception {
 			// Setup
 			// Exercise
 			String actual = StringUtil.toLowerSnakeCase(p.target);
@@ -129,13 +160,14 @@ public class StringUtilTest {
 	@RunWith(Theories.class)
 	public static class toLowerCamelCase {
 
+		@SuppressWarnings("rawtypes")
 		@DataPoints
 		public static Fixture[] PARAMS = {
-				new Fixture("created_at", "createdAt"),
-				new Fixture("dummy_user", "dummyUser"), };
+				new Fixture<String, String>("created_at", "createdAt"),
+				new Fixture<String, String>("dummy_user", "dummyUser"), };
 
 		@Theory
-		public void test(Fixture p) throws Exception {
+		public void test(Fixture<String, String> p) throws Exception {
 			// Setup
 			// Exercise
 			String actual = StringUtil.toLowerCamelCase(p.target);
@@ -148,14 +180,15 @@ public class StringUtilTest {
 	@RunWith(Theories.class)
 	public static class removeUnderScore {
 
+		@SuppressWarnings("rawtypes")
 		@DataPoints
 		public static Fixture[] PARAMS = {
-				new Fixture("created_At", "createdAt"),
-				new Fixture("DUMMY_USER", "DUMMYUSER"),
-				new Fixture("Annotation", "Annotation"), };
+				new Fixture<String, String>("created_At", "createdAt"),
+				new Fixture<String, String>("DUMMY_USER", "DUMMYUSER"),
+				new Fixture<String, String>("Annotation", "Annotation"), };
 
 		@Theory
-		public void test(Fixture p) throws Exception {
+		public void test(Fixture<String, String> p) throws Exception {
 			// Setup
 			// Exercise
 			String actual = StringUtil.removeUnderScore(p.target);
