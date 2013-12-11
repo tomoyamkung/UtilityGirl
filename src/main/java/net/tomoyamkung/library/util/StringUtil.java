@@ -250,13 +250,44 @@ public class StringUtil {
 			return "";
 		}
 
+		return join(values, " ");
+	}
+
+	/**
+	 * CSV に変換する。
+	 * 
+	 * @param values
+	 *            CSV に変換する文字列を格納したリスト
+	 * @return
+	 */
+	public static String toCsv(List<String> values) {
+		if (values == null || values.isEmpty()) {
+			return "";
+		}
+
+		return join(values, ",");
+	}
+
+	/**
+	 * 文字列を連結する。
+	 * 
+	 * @param values 連結したい文字列を格納したリスト
+	 * @param separateChar 連結する文字列の間に差し込む文字
+	 * @return
+	 */
+	private static String join(List<String> values, String separateChar) {
+		if(values == null || values.isEmpty()) {
+			return "";
+		}
+
 		StringBuilder builer = new StringBuilder();
 		for (String value : values) {
-			builer.append(value).append(" ");
+			builer.append(value).append(separateChar);
 		}
 		if (!values.isEmpty()) {
-			builer.delete(builer.length() - 1, builer.length());
+			builer.delete(builer.length() - separateChar.length(), builer.length());
 		}
 		return builer.toString();
 	}
+
 }

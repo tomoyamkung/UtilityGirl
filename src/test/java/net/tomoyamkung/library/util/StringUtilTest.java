@@ -19,6 +19,29 @@ import org.junit.runner.RunWith;
 public class StringUtilTest {
 
 	@RunWith(Theories.class)
+	public static class ToCsv {
+
+		static List<String> list = new ExtArrayList<String>().addThis("a")
+				.addThis("b").addThis("c");
+
+		@SuppressWarnings("rawtypes")
+		@DataPoints
+		public static Fixture[] PARAMS = {
+				new Fixture<List<String>, String>(null, ""),
+				new Fixture<List<String>, String>(new ArrayList<String>(), ""),
+				new Fixture<List<String>, String>(list, "a,b,c") };
+
+		@Theory
+		public void test(Fixture<List<String>, String> p) throws Exception {
+			// Setup
+			// Exercise
+			// Verify
+			assertThat(String.format("TARGET:%s EXPECTED:%s", p.target, p.expected),
+					StringUtil.toCsv(p.target), is(p.expected));
+		}
+	}
+
+	@RunWith(Theories.class)
 	public static class ToWhiteSpaceSeparatedValue {
 
 		static List<String> list = new ExtArrayList<String>().addThis("a")
