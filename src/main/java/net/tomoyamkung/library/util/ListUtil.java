@@ -46,7 +46,7 @@ public class ListUtil {
 	 *            検査するリスト
 	 * @return null または空の場合 true
 	 */
-	private static <T> boolean isNullOrEmpty(List<T> list) {
+	public static <T> boolean isNullOrEmpty(List<T> list) {
 		if (list == null || list.isEmpty()) {
 			return true;
 		}

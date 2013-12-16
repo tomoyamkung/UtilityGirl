@@ -37,6 +37,22 @@ Apache Maven 3.0.4 (r1232337; 2012-01-17 17:44:56+0900)
 ## 2013/12/16
 
 
+### バージョン 1.0.1 リリース
+
+次の修正を行いました。
+
+- net.tomoyamkung.library.util.ListUtil#isNullOrEmpty のスコープを public に変更
+
+この修正に伴い、バージョンを 1.0.1 に変更しました。
+
+```xml
+<groupId>net.tomoyamkung.library</groupId>
+<artifactId>UtilityGirl</artifactId>
+<version>1.0.1</version>
+<packaging>jar</packaging>
+```
+
+
 ### mvn-repo ブランチに JAR をデプロイしました
 
 - [UtilityGirl/net/tomoyamkung/library/UtilityGirl/1.0 at mvn-repo · tomoyamkung/UtilityGirl](https://github.com/tomoyamkung/UtilityGirl/tree/mvn-repo/net/tomoyamkung/library/UtilityGirl/1.0)
