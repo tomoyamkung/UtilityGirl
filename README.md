@@ -34,6 +34,35 @@ Apache Maven 3.0.4 (r1232337; 2012-01-17 17:44:56+0900)
 # お知らせ
 
 
+## 2013/12/17
+
+
+### バージョン 1.1 リリース
+
+`AppProperties` の追加により、バージョンを 1.1 としました。
+
+```xml
+<groupId>net.tomoyamkung.library</groupId>
+<artifactId>UtilityGirl</artifactId>
+<version>1.1</version>
+<packaging>jar</packaging>
+```
+
+
+### AppProperties を追加
+
+プロパティファイルを扱うクラス `net.tomoyamkung.library.AppProperties` を追加しました。
+
+クラスパス上に "app.properties" を作成すると、そのプロパティファイルを読み込んで定義されている値を取得することができます。
+値は次の3通りで取得できます。
+
+1. 文字列で取得する → `AppProperties#get`
+2. int に変換して取得する → `AppProperties#getInt`
+3. List<String> で取得する →  `AppProperties#getStringList`
+
+3番目の `AppProperties#getStringList` は値を CSV で定義しておく必要があります。
+
+
 ## 2013/12/16
 
 

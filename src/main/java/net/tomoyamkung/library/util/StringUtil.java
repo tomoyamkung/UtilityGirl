@@ -271,12 +271,14 @@ public class StringUtil {
 	/**
 	 * 文字列を連結する。
 	 * 
-	 * @param values 連結したい文字列を格納したリスト
-	 * @param separateChar 連結する文字列の間に差し込む文字
+	 * @param values
+	 *            連結したい文字列を格納したリスト
+	 * @param separateChar
+	 *            連結する文字列の間に差し込む文字
 	 * @return
 	 */
 	private static String join(List<String> values, String separateChar) {
-		if(values == null || values.isEmpty()) {
+		if (values == null || values.isEmpty()) {
 			return "";
 		}
 
@@ -285,7 +287,8 @@ public class StringUtil {
 			builer.append(value).append(separateChar);
 		}
 		if (!values.isEmpty()) {
-			builer.delete(builer.length() - separateChar.length(), builer.length());
+			builer.delete(builer.length() - separateChar.length(),
+					builer.length());
 		}
 		return builer.toString();
 	}

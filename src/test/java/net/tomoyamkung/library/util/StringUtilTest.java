@@ -36,8 +36,8 @@ public class StringUtilTest {
 			// Setup
 			// Exercise
 			// Verify
-			assertThat(String.format("TARGET:%s EXPECTED:%s", p.target, p.expected),
-					StringUtil.toCsv(p.target), is(p.expected));
+			assertThat(String.format("TARGET:%s EXPECTED:%s", p.target,
+					p.expected), StringUtil.toCsv(p.target), is(p.expected));
 		}
 	}
 
