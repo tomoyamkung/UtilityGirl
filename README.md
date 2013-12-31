@@ -33,6 +33,36 @@ Apache Maven 3.0.4 (r1232337; 2012-01-17 17:44:56+0900)
 
 # お知らせ
 
+## 2013/12/31
+
+### バージョン 1.2 リリース
+
+`FileUtil`, `DirectoryUtil` の追加により、バージョンを 1.2 としました。
+
+```xml
+<groupId>net.tomoyamkung.library</groupId>
+<artifactId>UtilityGirl</artifactId>
+<version>1.2</version>
+```
+
+
+## 2013/12/30
+
+
+### DirectoryUtil を追加
+
+ディレクトリを再作成する処理が必要になったので単機能しかないのですがこのクラスを作成しました。
+
+
+## 2013/12/29
+
+
+### FileUtil を追加
+
+`File` に関するユーティリティメソッドを扱うクラス `net.tomoyamkung.library.util.FileUtil` を追加しました。
+
+画像ファイルの拡張子に関する処理が必要になったのでこのクラスを作成しました。他にも処理が必要になれば追加していきます。
+
 
 ## 2013/12/17
 
