@@ -33,6 +33,16 @@ Apache Maven 3.0.4 (r1232337; 2012-01-17 17:44:56+0900)
 
 # お知らせ
 
+## 2014/01/19
+
+### CalendarUtil を追加
+
+指定した年月の Calendar オブジェクトを一覧で取得するメソッドを作成しました。
+
+- CalendarUtil#getCalendars
+- CalendarUtil#getCalendarsOfOneMonth
+
+
 ## 2013/12/31
 
 ### バージョン 1.2 リリース
