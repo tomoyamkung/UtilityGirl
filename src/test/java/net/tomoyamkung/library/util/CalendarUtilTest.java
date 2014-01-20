@@ -28,6 +28,11 @@ public class CalendarUtilTest {
 			
 			// Verify
 			assertThat(actual.get(Calendar.YEAR), is(2014));
+			assertThat(actual.get(Calendar.MONTH), is(0));
+			assertThat(actual.get(Calendar.DATE), is(1));
+			assertThat(actual.get(Calendar.HOUR_OF_DAY), is(10));
+			assertThat(actual.get(Calendar.MINUTE), is(59));
+			assertThat(actual.get(Calendar.SECOND), is(59));
 			
 		}
 	}

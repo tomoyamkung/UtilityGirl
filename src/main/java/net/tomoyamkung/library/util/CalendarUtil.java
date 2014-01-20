@@ -66,11 +66,20 @@ public class CalendarUtil {
 		return getCalendars(year, month, 1);
 	}
 
+	/**
+	 * 指定した「時(hour)」の59分59秒に設定した Calendar オブジェクトを取得する。
+	 * 
+	 * @param year 年
+	 * @param month 月
+	 * @param date 日
+	 * @param hourOfDay 時間
+	 * @return
+	 */
 	public static Calendar getLastTimeOfHour(int year, int month, int date,
 			int hourOfDay) {
-		// TODO Auto-generated method stub
 		Calendar instance = Calendar.getInstance();
-		return null;
+		instance.set(year, month, date, hourOfDay, 59, 59);
+		return instance;
 	}
 
 }
