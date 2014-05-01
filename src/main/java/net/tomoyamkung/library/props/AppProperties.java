@@ -1,5 +1,7 @@
 package net.tomoyamkung.library.props;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -26,7 +28,7 @@ public class AppProperties {
 	/**
 	 * 本クラスのインスタンス。
 	 */
-	private static AppProperties instance = new AppProperties();
+	private static AppProperties instance;
 
 	private Properties prop;
 
@@ -34,11 +36,20 @@ public class AppProperties {
 	 * app.properties を読み込む。
 	 * 
 	 */
-	private AppProperties() {
+	private AppProperties(String path) {
 		prop = new Properties();
 
-		InputStream inputStream = this.getClass().getClassLoader()
-				.getResourceAsStream(PROP_FILE_NAME);
+		InputStream inputStream = null;
+		if(StringUtil.isNullOrEmpty(path)) {
+			inputStream = this.getClass().getClassLoader()
+					.getResourceAsStream(PROP_FILE_NAME);
+		} else {
+			try {
+				inputStream = new FileInputStream(path);
+			} catch (FileNotFoundException e) {
+				throw new RuntimeException(e);
+			}
+		}
 		try {
 			prop.load(new InputStreamReader(inputStream, "UTF-8"));
 		} catch (UnsupportedEncodingException e) {
@@ -47,13 +58,33 @@ public class AppProperties {
 			throw new RuntimeException(e);
 		}
 	}
-
+	
 	/**
-	 * インスタンスを取得する。
+	 * インスタンスを生成する。
+	 * 
+	 * プロパティファイルはクラスパス上にある "app.properties" を参照する。
 	 * 
 	 * @return
 	 */
 	public static AppProperties getInstance() {
+		if(instance == null) {
+			instance = new AppProperties("");
+		}
+		return instance;
+	}
+
+	/**
+	 * インスタンスを生成する。
+	 * 
+	 * 指定したパスのプロパティファイルを読み込む。
+	 * 
+	 * @param path プロパティファイルのパス
+	 * @return
+	 */
+	public static AppProperties getInstance(String path) {
+		if(instance == null) {
+			instance = new AppProperties(path);
+		}
 		return instance;
 	}
 

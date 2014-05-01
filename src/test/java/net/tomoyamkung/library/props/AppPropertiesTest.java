@@ -12,6 +12,27 @@ import org.junit.runner.RunWith;
 
 @RunWith(Enclosed.class)
 public class AppPropertiesTest {
+	
+	public static class GetInstance {
+		
+		AppProperties sut;
+		
+		@Before
+		public void setUp() throws Exception {
+			sut = AppProperties.getInstance("./src/test/resources/app.properties");
+		}
+		
+		@Test
+		public void keyに該当するvalueが定義されている場合() throws Exception {
+			// Setup
+			// Exercise
+			String actual = sut.get("test.get");
+
+			// Verify
+			assertThat(actual, is("get"));
+
+		}
+	}
 
 	public static class GetStringList {
 		
