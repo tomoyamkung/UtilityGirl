@@ -17,9 +17,6 @@ Java(TM) SE Runtime Environment (build 1.6.0_37-b06)
 Java HotSpot(TM) 64-Bit Server VM (build 20.12-b01, mixed mode)
 ```
 
-JVM のバージョンが 1.6 なのは仕事都合です。。。
-
-
 ```sh
 mvn -v
 :
@@ -32,6 +29,19 @@ Apache Maven 3.0.4 (r1232337; 2012-01-17 17:44:56+0900)
 
 
 # お知らせ
+
+
+## 2014/01/19
+
+### AppProperties#getInstance に引数を取るメソッドを追加
+
+`AppProperties#getInstance` のオーバロードです。
+ファイルパスを受け取るメソッドを追加しました。
+
+参照するプロパティファイルはクラスパス上にある "app.properties" だけに制限されていましたが、このメソッドを使うことで参照するプロパティファイルを自由に選択することができます。
+
+※ライブラリのバージョン 1.2 からの対応です。
+
 
 ## 2014/01/19
 
