@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
@@ -12,9 +13,14 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class AppPropertiesTest {
 
-	private static AppProperties sut = AppProperties.getInstance();
-
 	public static class GetStringList {
+		
+		AppProperties sut;
+		
+		@Before
+		public void setUp() throws Exception {
+			sut = AppProperties.getInstance();
+		}
 
 		@Test(expected = IllegalArgumentException.class)
 		public void keyがnullの場合() throws Exception {
@@ -73,6 +79,13 @@ public class AppPropertiesTest {
 
 	public static class GetInt {
 
+		AppProperties sut;
+		
+		@Before
+		public void setUp() throws Exception {
+			sut = AppProperties.getInstance();
+		}
+
 		@Test(expected = IllegalArgumentException.class)
 		public void keyがnullの場合() throws Exception {
 			// Setup
@@ -114,6 +127,13 @@ public class AppPropertiesTest {
 	}
 
 	public static class Get {
+
+		AppProperties sut;
+		
+		@Before
+		public void setUp() throws Exception {
+			sut = AppProperties.getInstance();
+		}
 
 		@Test(expected = IllegalArgumentException.class)
 		public void keyがnullの場合() throws Exception {
