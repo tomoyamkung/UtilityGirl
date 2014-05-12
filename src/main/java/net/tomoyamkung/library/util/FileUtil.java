@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import net.tomoyamkung.library.model.file.Size;
 import net.tomoyamkung.library.props.AppProperties;
 
 import org.apache.commons.io.FileUtils;
@@ -139,5 +140,16 @@ public class FileUtil {
 				.addThis(".jpeg").addThis(".JPEG")
 				.addThis(".gif").addThis(".GIF")
 				.addThis(".png").addThis(".PNG");
+	}
+	
+	/**
+	 * 画像ファイルの寸法を測る。
+	 * 
+	 * @param file 寸法を測るファイルオブジェクト
+	 * @return
+	 * @throws IOException 画像の読み込みに失敗した場合
+	 */
+	public static Size measure(File file) throws IOException {
+		return new Size(file);
 	}
 }
